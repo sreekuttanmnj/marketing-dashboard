@@ -1,0 +1,41 @@
+week,week_start,week_end,brand,event_name,event_count,notes
+202613,2026-03-23,2026-03-29,OnlineCheckWriter,live-sign-up,774,Trusted signup event (US)
+202614,2026-03-30,2026-04-05,OnlineCheckWriter,live-sign-up,857,Trusted signup event (US)
+202615,2026-04-06,2026-04-12,OnlineCheckWriter,live-sign-up,1035,Trusted signup event (US)
+202616,2026-04-13,2026-04-19,OnlineCheckWriter,live-sign-up,1047,Trusted signup event (US)
+202617,2026-04-20,2026-04-26,OnlineCheckWriter,live-sign-up,1158,Trusted signup event (US)
+202618,2026-04-27,2026-05-03,OnlineCheckWriter,live-sign-up,894,Trusted signup event (US)
+202619,2026-05-04,2026-05-10,OnlineCheckWriter,live-sign-up,1135,Trusted signup event (US)
+202620,2026-05-11,2026-05-17,OnlineCheckWriter,live-sign-up,1323,Trusted signup event (US)
+202613,2026-03-23,2026-03-29,OnlineCheckWriter,live-upgrade-plan,360,Paid plan upgrade proxy (US)
+202614,2026-03-30,2026-04-05,OnlineCheckWriter,live-upgrade-plan,472,Paid plan upgrade proxy (US)
+202615,2026-04-06,2026-04-12,OnlineCheckWriter,live-upgrade-plan,566,Paid plan upgrade proxy (US)
+202616,2026-04-13,2026-04-19,OnlineCheckWriter,live-upgrade-plan,461,Paid plan upgrade proxy (US)
+202617,2026-04-20,2026-04-26,OnlineCheckWriter,live-upgrade-plan,494,Paid plan upgrade proxy (US)
+202618,2026-04-27,2026-05-03,OnlineCheckWriter,live-upgrade-plan,427,Paid plan upgrade proxy (US)
+202619,2026-05-04,2026-05-10,OnlineCheckWriter,live-upgrade-plan,410,Paid plan upgrade proxy (US)
+202620,2026-05-11,2026-05-17,OnlineCheckWriter,live-upgrade-plan,426,Paid plan upgrade proxy (US)
+202613,2026-03-23,2026-03-29,OnlineCheckWriter,live-pay-card,55,Card-payment activity (US)
+202614,2026-03-30,2026-04-05,OnlineCheckWriter,live-pay-card,30,Card-payment activity (US)
+202615,2026-04-06,2026-04-12,OnlineCheckWriter,live-pay-card,55,Card-payment activity (US)
+202616,2026-04-13,2026-04-19,OnlineCheckWriter,live-pay-card,41,Card-payment activity (US)
+202617,2026-04-20,2026-04-26,OnlineCheckWriter,live-pay-card,50,Card-payment activity (US)
+202618,2026-04-27,2026-05-03,OnlineCheckWriter,live-pay-card,51,Card-payment activity (US)
+202619,2026-05-04,2026-05-10,OnlineCheckWriter,live-pay-card,49,Card-payment activity (US)
+202620,2026-05-11,2026-05-17,OnlineCheckWriter,live-pay-card,40,Card-payment activity (US)
+202613,2026-03-23,2026-03-29,ZilMoney,contact_button_click,91,Lead proxy - no real signup event tracked
+202614,2026-03-30,2026-04-05,ZilMoney,contact_button_click,147,Lead proxy - no real signup event tracked
+202615,2026-04-06,2026-04-12,ZilMoney,contact_button_click,87,Lead proxy - no real signup event tracked
+202616,2026-04-13,2026-04-19,ZilMoney,contact_button_click,92,Lead proxy - no real signup event tracked
+202617,2026-04-20,2026-04-26,ZilMoney,contact_button_click,105,Lead proxy - no real signup event tracked
+202618,2026-04-27,2026-05-03,ZilMoney,contact_button_click,102,Lead proxy - no real signup event tracked
+202619,2026-05-04,2026-05-10,ZilMoney,contact_button_click,79,Lead proxy - no real signup event tracked
+202620,2026-05-11,2026-05-17,ZilMoney,contact_button_click,136,Lead proxy - no real signup event tracked
+202613,2026-03-23,2026-03-29,ZilMoney,generate_lead,50,Form-fill lead (US)
+202614,2026-03-30,2026-04-05,ZilMoney,generate_lead,24,Form-fill lead (US)
+202615,2026-04-06,2026-04-12,ZilMoney,generate_lead,50,Form-fill lead (US)
+202616,2026-04-13,2026-04-19,ZilMoney,generate_lead,20,Form-fill lead (US)
+202617,2026-04-20,2026-04-26,ZilMoney,generate_lead,30,Form-fill lead (US)
+202618,2026-04-27,2026-05-03,ZilMoney,generate_lead,44,Form-fill lead (US)
+202619,2026-05-04,2026-05-10,ZilMoney,generate_lead,30,Form-fill lead (US)
+202620,2026-05-11,2026-05-17,ZilMoney,generate_lead,42,Form-fill lead (US)

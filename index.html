@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Marketing KPI Dashboard — Feb to May 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #f6f8fa;
+  --panel: #ffffff;
+  --panel-2: #f6f8fa;
+  --border: #d0d7de;
+  --border-soft: #eaeef2;
+  --text: #1f2328;
+  --text-dim: #656d76;
+  --accent: #0969da;
+  --accent-soft: #ddf4ff;
+  --good: #1a7f37;
+  --bad: #cf222e;
+  --warn: #9a6700;
+  --warn-soft: #fff8c5;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1300px; margin: 0 auto; padding: 32px 24px; }
+header { margin-bottom: 28px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.header-text h1 { margin: 0 0 6px 0; font-size: 28px; font-weight: 600; letter-spacing: -0.3px; }
+.subtitle { color: var(--text-dim); font-size: 14px; }
+
+.toggle-group {
+  display: inline-flex;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+  gap: 2px;
+  box-shadow: 0 1px 2px rgba(31,35,40,0.04);
+}
+.toggle-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.12s;
+  font-family: inherit;
+}
+.toggle-btn:hover { color: var(--text); }
+.toggle-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 1px 2px rgba(9,105,218,0.25);
+}
+
+h2 { font-size: 18px; margin: 36px 0 14px 0; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+h3 { font-size: 12px; margin: 16px 0 10px 0; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 8px; }
+.kpi-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.kpi-label { color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; }
+.kpi-value { font-size: 30px; font-weight: 600; margin: 8px 0 4px 0; letter-spacing: -0.5px; }
+.kpi-delta { font-size: 13px; font-weight: 500; }
+.kpi-delta.up { color: var(--good); }
+.kpi-delta.down { color: var(--bad); }
+.kpi-delta.flat { color: var(--text-dim); }
+
+.note-line { margin: 12px 0 0 0; font-size: 12px; color: var(--text-dim); }
+.note-line a { color: var(--accent); text-decoration: none; }
+.note-line a:hover { text-decoration: underline; }
+
+.brand-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.brand-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-soft); }
+.brand-name { font-size: 20px; font-weight: 600; letter-spacing: -0.2px; }
+.brand-tag { font-size: 12px; color: var(--text-dim); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.grid-2 > div { min-width: 0; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--border-soft); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--text-dim); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; background: var(--panel-2); border-bottom: 1px solid var(--border); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--panel-2); }
+tbody tr.partial { background: var(--warn-soft); }
+tbody tr.partial:hover { background: #fff3a8; }
+td.dim { color: var(--text-dim); font-weight: normal; }
+td.num { font-variant-numeric: tabular-nums; }
+.partial-tag { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 4px; background: var(--warn); color: white; margin-left: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+
+.chart-wrap { position: relative; height: 280px; margin-top: 8px; }
+
+.alert { background: var(--warn-soft); border: 1px solid #f2d775; border-left: 3px solid var(--warn); padding: 14px 18px; margin: 12px 0; border-radius: 6px; font-size: 13px; }
+.alert strong { color: var(--warn); display: block; margin-bottom: 4px; }
+
+.placeholder-section { background: var(--panel); border: 1px dashed var(--border); border-radius: 8px; padding: 22px; margin-bottom: 20px; }
+.placeholder-label { color: var(--warn); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700; margin-bottom: 10px; }
+.placeholder-section p { margin: 0 0 14px 0; color: var(--text-dim); font-size: 13px; }
+.placeholder-section td.empty { color: #afb8c1; font-style: italic; }
+
+.footer { color: var(--text-dim); font-size: 12px; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); }
+.footer code { background: var(--panel); padding: 1px 5px; border-radius: 3px; border: 1px solid var(--border-soft); font-size: 11px; }
+
+@media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="header-text">
+    <h1>Marketing KPI Dashboard</h1>
+    <div class="subtitle" id="subtitle">Weekly view — 8 ISO weeks ending Sunday May 17, 2026 — US traffic only — OnlineCheckWriter + ZilMoney</div>
+  </div>
+  <div class="toggle-group" role="tablist" aria-label="Time granularity">
+    <button class="toggle-btn active" id="btn-weekly" role="tab" aria-selected="true">Weekly</button>
+    <button class="toggle-btn" id="btn-monthly" role="tab" aria-selected="false">Monthly</button>
+  </div>
+</header>
+
+<h2 id="kpi-heading">Headline KPIs (Week of May 11-17, 2026)</h2>
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-label">Total US Sessions</div>
+    <div class="kpi-value" id="kpi-sessions"></div>
+    <div class="kpi-delta" id="kpi-sessions-d"></div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Total US Search Clicks</div>
+    <div class="kpi-value" id="kpi-clicks"></div>
+    <div class="kpi-delta" id="kpi-clicks-d"></div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">OCW Trial Signups</div>
+    <div class="kpi-value" id="kpi-signups"></div>
+    <div class="kpi-delta" id="kpi-signups-d"></div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">OCW Paid Upgrades</div>
+    <div class="kpi-value" id="kpi-upgrades"></div>
+    <div class="kpi-delta" id="kpi-upgrades-d"></div>
+  </div>
+</div>
+<div class="note-line">Switch between weekly and monthly views with the toggle above. Methodology and tracking caveats are at the <a href="#notes">bottom of this report</a>.</div>
+
+<h2>Cross-Brand Traffic Trend</h2>
+<div class="brand-section">
+  <div class="chart-wrap"><canvas id="chart-overall"></canvas></div>
+</div>
+
+<h2>By Brand</h2>
+
+<div class="brand-section">
+  <div class="brand-header">
+    <div>
+      <div class="brand-name">OnlineCheckWriter</div>
+      <div class="brand-tag">GA4 property 254458280 &middot; onlinecheckwriter.com</div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3 id="ocw-tbl-heading">Weekly US Traffic + Search</h3>
+      <table>
+        <thead><tr><th id="ocw-period-th">Week</th><th>Sessions</th><th>Users</th><th>New Users</th><th>Search Clicks</th><th>Search Impr.</th></tr></thead>
+        <tbody id="tbl-ocw"></tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Channel Mix (Top 6)</h3>
+      <div class="chart-wrap"><canvas id="chart-ocw-channels"></canvas></div>
+    </div>
+  </div>
+  <h3 style="margin-top: 24px;">Conversion Events (GA4, US-filtered)</h3>
+  <table>
+    <thead><tr><th id="ocw-conv-th">Week</th><th>Trial Signups (live-sign-up)</th><th>Paid Upgrades (live-upgrade-plan)</th><th>Card Payments (live-pay-card)</th></tr></thead>
+    <tbody id="tbl-ocw-conv"></tbody>
+  </table>
+</div>
+
+<div class="brand-section">
+  <div class="brand-header">
+    <div>
+      <div class="brand-name">ZilMoney</div>
+      <div class="brand-tag">GA4 property 311648623 &middot; zilmoney.com</div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3 id="zm-tbl-heading">Weekly US Traffic + Search</h3>
+      <table>
+        <thead><tr><th id="zm-period-th">Week</th><th>Sessions</th><th>Users</th><th>New Users</th><th>Search Clicks</th><th>Search Impr.</th></tr></thead>
+        <tbody id="tbl-zm"></tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Channel Mix (Top 6)</h3>
+      <div class="chart-wrap"><canvas id="chart-zm-channels"></canvas></div>
+    </div>
+  </div>
+  <h3 style="margin-top: 24px;">Lead-Proxy Events (GA4, US-filtered)</h3>
+  <table>
+    <thead><tr><th id="zm-conv-th">Week</th><th>Contact-Button Clicks</th><th>Lead Form Submissions</th></tr></thead>
+    <tbody id="tbl-zm-conv"></tbody>
+  </table>
+</div>
+
+<h2>Internal-Database KPIs (Pending Product Database Pull)</h2>
+<div class="placeholder-section">
+  <div class="placeholder-label">Placeholder — marketing team to populate from product database</div>
+  <p>Trial signups (non-paid users), paid signups (checks vs digital), KYB/KYC submitted, KYB/KYC approved, approval %, and paying customers (checks vs digital) are not derivable from GA4 or Search Console. The structure below matches what should be queried from the product/billing database.</p>
+  <table>
+    <thead><tr>
+      <th>Period</th><th>Brand</th><th>Trial Signups</th><th>Paid (Checks)</th><th>Paid (Digital)</th>
+      <th>KYC Submitted</th><th>KYC Approved</th><th>Approval %</th><th>Paying (Checks)</th><th>Paying (Digital)</th>
+    </tr></thead>
+    <tbody id="tbl-placeholder"></tbody>
+  </table>
+</div>
+
+<h2 id="notes">Notes &amp; Data-Quality Caveats</h2>
+<div class="brand-section">
+  <h3>Tracking gaps to be aware of</h3>
+  <div class="alert">
+    <strong>ZilMoney signup event is unreliable.</strong>
+    The dedicated signup event (<code>singup_zm</code>) fires fewer than 1 time per week. The dashboard uses <code>contact_button_click</code> and <code>generate_lead</code> as lead proxies. Authoritative ZilMoney signup numbers should come from the product database.
+  </div>
+  <div class="alert">
+    <strong>OCW sessions are heavily weighted toward existing-user logins.</strong>
+    The <code>/login</code> page accounts for ~50% of OCW sessions. "New acquisition" is better represented by the <code>New Users</code> column or the trial-signup event. When discussing acquisition, prefer those over raw Sessions.
+  </div>
+  <div class="alert">
+    <strong>The latest period (May 2026 / W21) is partial.</strong>
+    Monthly view: May contains only data through May 17, so the May bar is roughly half a month. It will look low — that's expected. Weekly view: only complete weeks (W13-W20) are shown.
+  </div>
+  <h3 style="margin-top: 20px;">Methodology</h3>
+  <p style="font-size:13px; color: var(--text-dim); margin: 0;">
+    Traffic data is pulled from the GA4 Data API with the country dimension filtered to "United States." Search data is pulled from the Google Search Console API with the country filter set to USA. Weekly view uses ISO weeks (Monday start, Sunday end), 8 complete weeks ending May 17, 2026. Monthly view uses calendar months from February through May 2026. Both OnlineCheckWriter and ZilMoney report in America/Chicago, so periods line up cleanly across brands.
+  </p>
+</div>
+
+<div class="footer">
+  Source: GA4 Data API (US-only via <code>country=United States</code>) + Google Search Console API (US-only via <code>USA</code> country filter).
+  Pulled 2026-05-20. Re-runnable any time with no manual pipeline.
+</div>
+
+</div>
+
+<script>
+const dataWeekly = {
+  periods: [
+    {label:'W13', start:'Mar 23', partial:false},
+    {label:'W14', start:'Mar 30', partial:false},
+    {label:'W15', start:'Apr 06', partial:false},
+    {label:'W16', start:'Apr 13', partial:false},
+    {label:'W17', start:'Apr 20', partial:false},
+    {label:'W18', start:'Apr 27', partial:false},
+    {label:'W19', start:'May 04', partial:false},
+    {label:'W20', start:'May 11', partial:false}
+  ],
+  OCW: {
+    sessions: [25096,26922,27358,27976,27332,26901,28502,28616],
+    users:    [9647,10441,10358,10646,10554,10167,10167,10667],
+    newUsers: [5893,6669,6731,6784,6759,6494,6558,6985],
+    clicks:   [3751,4403,4240,4566,4247,4199,3685,3395],
+    impr:     [281210,256045,252095,244040,196217,302982,276952,250842],
+    signUp:   [774,857,1035,1047,1158,894,1135,1323],
+    upgrade:  [360,472,566,461,494,427,410,426],
+    payCard:  [55,30,55,41,50,51,49,40],
+    channels: {
+      Direct:           [18729,21131,21071,22787,21306,21802,22741,22825],
+      Referral:         [3391,3927,3654,3883,3908,4054,3978,4098],
+      'Organic Search': [795,965,863,710,746,776,679,853],
+      Unassigned:       [2226,494,1489,449,438,366,307,401],
+      'Organic Video':  [131,167,128,140,165,179,194,171],
+      'Paid Search':    [64,47,23,21,8,6,17,67]
+    }
+  },
+  ZM: {
+    sessions: [2982,3264,2651,2613,2668,2825,2815,2773],
+    users:    [2023,1990,1778,1688,1788,1883,1849,1730],
+    newUsers: [1610,1570,1370,1338,1395,1492,1464,1356],
+    clicks:   [1284,1140,1025,1049,1131,1131,1226,973],
+    impr:     [186815,161025,148612,137069,135537,180414,173030,144675],
+    contact:  [91,147,87,92,105,102,79,136],
+    lead:     [50,24,50,20,30,44,30,42],
+    channels: {
+      Direct:           [1654,1913,1495,1498,1489,1541,1633,1606],
+      'Organic Search': [610,616,614,613,629,677,748,651],
+      Referral:         [239,303,188,219,299,263,218,263],
+      Unassigned:       [242,252,221,153,137,163,149,137],
+      'Organic Social': [136,109,100,89,86,156,99,104],
+      'Cross-network':  [22,12,34,22,19,26,29,7]
+    }
+  }
+};
+
+const dataMonthly = {
+  periods: [
+    {label:'Feb 2026', start:'Feb', partial:false},
+    {label:'Mar 2026', start:'Mar', partial:false},
+    {label:'Apr 2026', start:'Apr', partial:false},
+    {label:'May 2026', start:'May 1-17', partial:true}
+  ],
+  OCW: {
+    sessions: [107331,122767,119388,64943],
+    users:    [34442,35009,34836,20757],
+    newUsers: [28390,28716,28811,15897],
+    clicks:   [13193,15368,18641,8556],
+    impr:     [905173,1171053,1045995,657598],
+    signUp:   [3730,3837,4349,2874],
+    upgrade:  [1813,1771,2104,956],
+    payCard:  [192,208,202,100],
+    channels: {
+      Direct:           [81609,92485,95191,51904],
+      Referral:         [15832,17141,16863,9164],
+      'Organic Search': [5385,4514,3533,1745],
+      Unassigned:       [2963,4401,2928,913],
+      'Organic Video':  [541,712,668,413],
+      'Paid Search':    [615,467,80,149]
+    }
+  },
+  ZM: {
+    sessions: [12211,15287,12005,6467],
+    users:    [8292,9229,6955,3867],
+    newUsers: [7253,8026,6078,3264],
+    clicks:   [4816,5699,4681,2550],
+    impr:     [624138,781178,644522,384831],
+    contact:  [334,525,419,246],
+    lead:     [136,214,148,82],
+    channels: {
+      Direct:           [6921,8303,6850,3754],
+      'Organic Search': [2549,3206,2678,1614],
+      Referral:         [1010,1108,1067,553],
+      Unassigned:       [699,1246,791,324],
+      'Organic Social': [746,678,450,240],
+      Display:          [304,369,6,5]
+    }
+  }
+};
+
+const fmt = n => n.toLocaleString('en-US');
+const wowDelta = (cur, prev, partial) => {
+  if (prev === 0 && cur === 0) return {cls: 'flat', text: 'flat'};
+  if (prev === 0) return {cls: 'up', text: 'new'};
+  const pct = ((cur - prev) / prev) * 100;
+  const cls = pct > 1 ? 'up' : pct < -1 ? 'down' : 'flat';
+  const arrow = pct > 1 ? '▲' : pct < -1 ? '▼' : '●';
+  const suffix = partial ? ' vs previous (current period partial)' : '';
+  return {cls, text: arrow + ' ' + Math.abs(pct).toFixed(1) + '%' + suffix};
+};
+
+let chartOverall, chartOcwCh, chartZmCh;
+let mode = 'weekly';
+
+function render() {
+  const D = mode === 'weekly' ? dataWeekly : dataMonthly;
+  const periods = D.periods;
+  const lastIdx = periods.length - 1;
+  const prevIdx = lastIdx - 1;
+  const partial = periods[lastIdx].partial;
+
+  document.getElementById('subtitle').textContent = mode === 'weekly'
+    ? 'Weekly view — 8 ISO weeks ending Sunday May 17, 2026 — US traffic only — OnlineCheckWriter + ZilMoney'
+    : 'Monthly view — Feb to May 2026 (May 1-17, partial) — US traffic only — OnlineCheckWriter + ZilMoney';
+  document.getElementById('kpi-heading').textContent = mode === 'weekly'
+    ? 'Headline KPIs (Week of May 11-17, 2026)'
+    : 'Headline KPIs (May 2026, partial through May 17)';
+
+  const periodLabel = mode === 'weekly' ? 'Week' : 'Month';
+  document.getElementById('ocw-period-th').textContent = periodLabel;
+  document.getElementById('zm-period-th').textContent = periodLabel;
+  document.getElementById('ocw-conv-th').textContent = periodLabel;
+  document.getElementById('zm-conv-th').textContent = periodLabel;
+  document.getElementById('ocw-tbl-heading').textContent = (mode === 'weekly' ? 'Weekly' : 'Monthly') + ' US Traffic + Search';
+  document.getElementById('zm-tbl-heading').textContent = (mode === 'weekly' ? 'Weekly' : 'Monthly') + ' US Traffic + Search';
+
+  const totalSessions = D.OCW.sessions[lastIdx] + D.ZM.sessions[lastIdx];
+  const totalSessionsPrev = D.OCW.sessions[prevIdx] + D.ZM.sessions[prevIdx];
+  const totalClicks = D.OCW.clicks[lastIdx] + D.ZM.clicks[lastIdx];
+  const totalClicksPrev = D.OCW.clicks[prevIdx] + D.ZM.clicks[prevIdx];
+
+  document.getElementById('kpi-sessions').innerHTML = fmt(totalSessions) + (partial ? ' <span class="partial-tag">partial</span>' : '');
+  document.getElementById('kpi-clicks').innerHTML = fmt(totalClicks) + (partial ? ' <span class="partial-tag">partial</span>' : '');
+  document.getElementById('kpi-signups').innerHTML = fmt(D.OCW.signUp[lastIdx]) + (partial ? ' <span class="partial-tag">partial</span>' : '');
+  document.getElementById('kpi-upgrades').innerHTML = fmt(D.OCW.upgrade[lastIdx]) + (partial ? ' <span class="partial-tag">partial</span>' : '');
+
+  const s_d = wowDelta(totalSessions, totalSessionsPrev, partial);
+  const c_d = wowDelta(totalClicks, totalClicksPrev, partial);
+  const u_d = wowDelta(D.OCW.signUp[lastIdx], D.OCW.signUp[prevIdx], partial);
+  const p_d = wowDelta(D.OCW.upgrade[lastIdx], D.OCW.upgrade[prevIdx], partial);
+  const cmpLabel = mode === 'weekly' ? ' week over week' : ' month over month';
+  const apply = (id, d) => {
+    const el = document.getElementById(id);
+    el.className = 'kpi-delta ' + d.cls;
+    el.textContent = d.text.includes('vs previous') ? d.text : d.text + cmpLabel;
+  };
+  apply('kpi-sessions-d', s_d);
+  apply('kpi-clicks-d', c_d);
+  apply('kpi-signups-d', u_d);
+  apply('kpi-upgrades-d', p_d);
+
+  function trafficRows(tbodyId, d) {
+    document.getElementById(tbodyId).innerHTML = periods.map((p, i) => {
+      const cls = p.partial ? ' class="partial"' : '';
+      const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
+      return '<tr' + cls + '>' +
+        '<td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
+        '<td class="num">' + fmt(d.sessions[i]) + '</td>' +
+        '<td class="num">' + fmt(d.users[i]) + '</td>' +
+        '<td class="num">' + fmt(d.newUsers[i]) + '</td>' +
+        '<td class="num">' + fmt(d.clicks[i]) + '</td>' +
+        '<td class="num">' + fmt(d.impr[i]) + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+  trafficRows('tbl-ocw', D.OCW);
+  trafficRows('tbl-zm', D.ZM);
+
+  document.getElementById('tbl-ocw-conv').innerHTML = periods.map((p, i) => {
+    const cls = p.partial ? ' class="partial"' : '';
+    const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
+    return '<tr' + cls + '><td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
+      '<td class="num">' + fmt(D.OCW.signUp[i]) + '</td>' +
+      '<td class="num">' + fmt(D.OCW.upgrade[i]) + '</td>' +
+      '<td class="num">' + fmt(D.OCW.payCard[i]) + '</td></tr>';
+  }).join('');
+
+  document.getElementById('tbl-zm-conv').innerHTML = periods.map((p, i) => {
+    const cls = p.partial ? ' class="partial"' : '';
+    const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
+    return '<tr' + cls + '><td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
+      '<td class="num">' + fmt(D.ZM.contact[i]) + '</td>' +
+      '<td class="num">' + fmt(D.ZM.lead[i]) + '</td></tr>';
+  }).join('');
+
+  const brands = ['OnlineCheckWriter', 'ZilMoney'];
+  let phRows = '';
+  periods.forEach(p => {
+    brands.forEach(b => {
+      phRows += '<tr><td>' + p.label + '</td><td>' + b + '</td>' + '<td class="empty">&mdash;</td>'.repeat(8) + '</tr>';
+    });
+  });
+  document.getElementById('tbl-placeholder').innerHTML = phRows;
+
+  drawCharts(D);
+}
+
+const baseOpts = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { labels: { color: '#1f2328', font: { size: 11 }, usePointStyle: true, padding: 12 } },
+    tooltip: { backgroundColor: '#ffffff', titleColor: '#1f2328', bodyColor: '#1f2328', borderColor: '#d0d7de', borderWidth: 1, padding: 10 }
+  },
+  scales: {
+    x: { ticks: { color: '#656d76', font: { size: 11 } }, grid: { color: '#eaeef2' } },
+    y: { ticks: { color: '#656d76', font: { size: 11 } }, grid: { color: '#eaeef2' }, beginAtZero: true }
+  }
+};
+
+const palette = ['#0969da','#1a7f37','#9a6700','#8250df','#cf222e','#0550ae'];
+
+function drawCharts(D) {
+  if (chartOverall) chartOverall.destroy();
+  if (chartOcwCh) chartOcwCh.destroy();
+  if (chartZmCh) chartZmCh.destroy();
+
+  const labels = D.periods.map(p => p.label);
+
+  chartOverall = new Chart(document.getElementById('chart-overall'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'OnlineCheckWriter sessions', data: D.OCW.sessions, borderColor: '#0969da', backgroundColor: 'rgba(9,105,218,0.08)', tension: 0.3, borderWidth: 2, pointRadius: 4, pointHoverRadius: 6 },
+        { label: 'ZilMoney sessions', data: D.ZM.sessions, borderColor: '#1a7f37', backgroundColor: 'rgba(26,127,55,0.08)', tension: 0.3, borderWidth: 2, pointRadius: 4, pointHoverRadius: 6 }
+      ]
+    },
+    options: baseOpts
+  });
+
+  function channelChart(canvasId, channels) {
+    const top = Object.entries(channels)
+      .sort((a,b) => b[1].reduce((x,y)=>x+y,0) - a[1].reduce((x,y)=>x+y,0))
+      .slice(0, 6);
+    const datasets = top.map(([name, vals], i) => ({
+      label: name, data: vals, backgroundColor: palette[i % palette.length]
+    }));
+    return new Chart(document.getElementById(canvasId), {
+      type: 'bar',
+      data: { labels, datasets },
+      options: { ...baseOpts, scales: { x: { ...baseOpts.scales.x, stacked: true }, y: { ...baseOpts.scales.y, stacked: true } } }
+    });
+  }
+  chartOcwCh = channelChart('chart-ocw-channels', D.OCW.channels);
+  chartZmCh = channelChart('chart-zm-channels', D.ZM.channels);
+}
+
+document.getElementById('btn-weekly').addEventListener('click', () => {
+  if (mode === 'weekly') return;
+  mode = 'weekly';
+  document.getElementById('btn-weekly').classList.add('active');
+  document.getElementById('btn-weekly').setAttribute('aria-selected', 'true');
+  document.getElementById('btn-monthly').classList.remove('active');
+  document.getElementById('btn-monthly').setAttribute('aria-selected', 'false');
+  render();
+});
+document.getElementById('btn-monthly').addEventListener('click', () => {
+  if (mode === 'monthly') return;
+  mode = 'monthly';
+  document.getElementById('btn-monthly').classList.add('active');
+  document.getElementById('btn-monthly').setAttribute('aria-selected', 'true');
+  document.getElementById('btn-weekly').classList.remove('active');
+  document.getElementById('btn-weekly').setAttribute('aria-selected', 'false');
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

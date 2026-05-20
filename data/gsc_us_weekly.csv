@@ -1,0 +1,17 @@
+week,week_start,week_end,brand,site_url,clicks,impressions,ctr
+202613,2026-03-23,2026-03-29,OnlineCheckWriter,https://onlinecheckwriter.com/,3751,281210,0.01334
+202614,2026-03-30,2026-04-05,OnlineCheckWriter,https://onlinecheckwriter.com/,4403,256045,0.01720
+202615,2026-04-06,2026-04-12,OnlineCheckWriter,https://onlinecheckwriter.com/,4240,252095,0.01682
+202616,2026-04-13,2026-04-19,OnlineCheckWriter,https://onlinecheckwriter.com/,4566,244040,0.01871
+202617,2026-04-20,2026-04-26,OnlineCheckWriter,https://onlinecheckwriter.com/,4247,196217,0.02164
+202618,2026-04-27,2026-05-03,OnlineCheckWriter,https://onlinecheckwriter.com/,4199,302982,0.01386
+202619,2026-05-04,2026-05-10,OnlineCheckWriter,https://onlinecheckwriter.com/,3685,276952,0.01331
+202620,2026-05-11,2026-05-17,OnlineCheckWriter,https://onlinecheckwriter.com/,3395,250842,0.01353
+202613,2026-03-23,2026-03-29,ZilMoney,https://zilmoney.com/,1284,186815,0.00687
+202614,2026-03-30,2026-04-05,ZilMoney,https://zilmoney.com/,1140,161025,0.00708
+202615,2026-04-06,2026-04-12,ZilMoney,https://zilmoney.com/,1025,148612,0.00690
+202616,2026-04-13,2026-04-19,ZilMoney,https://zilmoney.com/,1049,137069,0.00765
+202617,2026-04-20,2026-04-26,ZilMoney,https://zilmoney.com/,1131,135537,0.00834
+202618,2026-04-27,2026-05-03,ZilMoney,https://zilmoney.com/,1131,180414,0.00627
+202619,2026-05-04,2026-05-10,ZilMoney,https://zilmoney.com/,1226,173030,0.00709
+202620,2026-05-11,2026-05-17,ZilMoney,https://zilmoney.com/,973,144675,0.00673

@@ -1,0 +1,9 @@
+year_month,month_start,month_end,brand,site_url,clicks,impressions,is_partial
+202602,2026-02-01,2026-02-28,OnlineCheckWriter,https://onlinecheckwriter.com/,13193,905173,false
+202603,2026-03-01,2026-03-31,OnlineCheckWriter,https://onlinecheckwriter.com/,15368,1171053,false
+202604,2026-04-01,2026-04-30,OnlineCheckWriter,https://onlinecheckwriter.com/,18641,1045995,false
+202605,2026-05-01,2026-05-17,OnlineCheckWriter,https://onlinecheckwriter.com/,8556,657598,true
+202602,2026-02-01,2026-02-28,ZilMoney,https://zilmoney.com/,4816,624138,false
+202603,2026-03-01,2026-03-31,ZilMoney,https://zilmoney.com/,5699,781178,false
+202604,2026-04-01,2026-04-30,ZilMoney,https://zilmoney.com/,4681,644522,false
+202605,2026-05-01,2026-05-17,ZilMoney,https://zilmoney.com/,2550,384831,true
