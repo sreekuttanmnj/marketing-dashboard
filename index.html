@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Marketing KPI Dashboard — Feb to May 2026</title>
+<title>Marketing KPI Dashboard — Mar 20 to May 20, 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
@@ -34,34 +34,6 @@ body {
 header { margin-bottom: 28px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .header-text h1 { margin: 0 0 6px 0; font-size: 28px; font-weight: 600; letter-spacing: -0.3px; }
 .subtitle { color: var(--text-dim); font-size: 14px; }
-
-.toggle-group {
-  display: inline-flex;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 4px;
-  gap: 2px;
-  box-shadow: 0 1px 2px rgba(31,35,40,0.04);
-}
-.toggle-btn {
-  border: none;
-  background: transparent;
-  padding: 8px 18px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-dim);
-  cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.12s;
-  font-family: inherit;
-}
-.toggle-btn:hover { color: var(--text); }
-.toggle-btn.active {
-  background: var(--accent);
-  color: white;
-  box-shadow: 0 1px 2px rgba(9,105,218,0.25);
-}
 
 h2 { font-size: 18px; margin: 36px 0 14px 0; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
 h3 { font-size: 12px; margin: 16px 0 10px 0; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
@@ -131,38 +103,34 @@ td.num { font-variant-numeric: tabular-nums; }
 <header>
   <div class="header-text">
     <h1>Marketing KPI Dashboard</h1>
-    <div class="subtitle" id="subtitle">Weekly view — 8 ISO weeks ending Sunday May 17, 2026 — US traffic only — OnlineCheckWriter + ZilMoney</div>
-  </div>
-  <div class="toggle-group" role="tablist" aria-label="Time granularity">
-    <button class="toggle-btn active" id="btn-weekly" role="tab" aria-selected="true">Weekly</button>
-    <button class="toggle-btn" id="btn-monthly" role="tab" aria-selected="false">Monthly</button>
+    <div class="subtitle">Reporting window: Mar 20 – May 20, 2026 — Weekly breakdown (8 complete ISO weeks within window) — US traffic only — OnlineCheckWriter + ZilMoney</div>
   </div>
 </header>
 
-<h2 id="kpi-heading">Headline KPIs (Week of May 11-17, 2026)</h2>
+<h2 id="kpi-heading">Headline KPIs — Window Total (Mar 20 to May 20, 2026)</h2>
 <div class="kpi-grid">
   <div class="kpi-card">
     <div class="kpi-label">Total US Sessions</div>
-    <div class="kpi-value" id="kpi-sessions"></div>
-    <div class="kpi-delta" id="kpi-sessions-d"></div>
+    <div class="kpi-value">241,294</div>
+    <div class="kpi-delta flat">OCW 218,703 &middot; ZM 22,591</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-label">Total US Search Clicks</div>
-    <div class="kpi-value" id="kpi-clicks"></div>
-    <div class="kpi-delta" id="kpi-clicks-d"></div>
+    <div class="kpi-label">Total US Search Clicks (GSC)</div>
+    <div class="kpi-value">41,445</div>
+    <div class="kpi-delta flat">OCW 32,486 &middot; ZM 8,959</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-label">OCW Trial Signups</div>
-    <div class="kpi-value" id="kpi-signups"></div>
-    <div class="kpi-delta" id="kpi-signups-d"></div>
+    <div class="kpi-label">OCW Signups (Internal DB)</div>
+    <div class="kpi-value">41,163</div>
+    <div class="kpi-delta flat">Mar 20 – May 20 · product database</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-label">OCW Paid Upgrades</div>
-    <div class="kpi-value" id="kpi-upgrades"></div>
-    <div class="kpi-delta" id="kpi-upgrades-d"></div>
+    <div class="kpi-label">OCW New Subscriptions (Internal DB)</div>
+    <div class="kpi-value">673</div>
+    <div class="kpi-delta flat">Mar 20 – May 20 · Signup→Sub 1.63%</div>
   </div>
 </div>
-<div class="note-line">Switch between weekly and monthly views with the toggle above. Methodology and tracking caveats are at the <a href="#notes">bottom of this report</a>.</div>
+<div class="note-line">Sessions and Search Clicks are summed over the 8 complete ISO weeks (W13–W20: Mar 23 – May 17) — edges Mar 20–22 and May 18–20 excluded because GA4/GSC only deliver complete-ISO-week data. OCW Signups and New Subscriptions are from the internal product database, which has full weekly coverage including partial edge weeks, so they reflect the true Mar 20 – May 20 totals. Methodology and tracking caveats at the <a href="#notes">bottom of this report</a>.</div>
 
 <h2>Cross-Brand Traffic Trend</h2>
 <div class="brand-section">
@@ -225,17 +193,78 @@ td.num { font-variant-numeric: tabular-nums; }
   </table>
 </div>
 
-<h2>Internal-Database KPIs (Pending Product Database Pull)</h2>
-<div class="placeholder-section">
-  <div class="placeholder-label">Placeholder — marketing team to populate from product database</div>
-  <p>Trial signups (non-paid users), paid signups (checks vs digital), KYB/KYC submitted, KYB/KYC approved, approval %, and paying customers (checks vs digital) are not derivable from GA4 or Search Console. The structure below matches what should be queried from the product/billing database.</p>
+<h2>Google Ads (Paid Campaigns)</h2>
+<div class="brand-section">
+  <div class="brand-header">
+    <div>
+      <div class="brand-name">Google Ads Account</div>
+      <div class="brand-tag">Campaign Report export &middot; matches dashboard window (Mar 20 – May 20, 2026, 62 days)</div>
+    </div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Impressions</div>
+      <div class="kpi-value">328,362</div>
+      <div class="kpi-delta flat">Window total (62 days)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Clicks</div>
+      <div class="kpi-value">4,743</div>
+      <div class="kpi-delta flat">CTR 1.44% &middot; Avg CPC $0.63</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Cost</div>
+      <div class="kpi-value">$2,986.29</div>
+      <div class="kpi-delta flat">~$48.17/day avg</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Conversions</div>
+      <div class="kpi-value">415.50</div>
+      <div class="kpi-delta flat">Cost/conv $7.19 &middot; CvR 1.58%</div>
+    </div>
+  </div>
+  <h3 style="margin-top: 22px;">Breakdown by Campaign Type</h3>
   <table>
     <thead><tr>
-      <th>Period</th><th>Brand</th><th>Trial Signups</th><th>Paid (Checks)</th><th>Paid (Digital)</th>
-      <th>KYC Submitted</th><th>KYC Approved</th><th>Approval %</th><th>Paying (Checks)</th><th>Paying (Digital)</th>
+      <th>Campaign Type</th><th>Impressions</th><th>Clicks</th><th>Interactions</th><th>Cost</th><th>Conversions</th><th>Cost / Conv.</th><th>Conv. Rate</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>Search</td><td class="num">6,659</td><td class="num">948</td><td class="num">948</td><td class="num">$1,802.42</td><td class="num">206.50</td><td class="num">$8.73</td><td class="num">21.78%</td></tr>
+      <tr><td>Performance Max</td><td class="num">10,396</td><td class="num">593</td><td class="num">593</td><td class="num">$546.43</td><td class="num">13.00</td><td class="num">$42.03</td><td class="num">2.19%</td></tr>
+      <tr><td>Display</td><td class="num">281,847</td><td class="num">2,810</td><td class="num">2,810</td><td class="num">$396.48</td><td class="num">0.00</td><td class="num dim">&mdash;</td><td class="num">0.00%</td></tr>
+      <tr><td>Demand Gen</td><td class="num">21,705</td><td class="num">9</td><td class="num">20,468</td><td class="num">$145.90</td><td class="num">6.00</td><td class="num">$24.32</td><td class="num">0.03%</td></tr>
+      <tr><td>App</td><td class="num">3,586</td><td class="num">381</td><td class="num">386</td><td class="num">$69.79</td><td class="num">190.00</td><td class="num">$0.37</td><td class="num">49.22%</td></tr>
+      <tr><td>Video</td><td class="num">4,169</td><td class="num">2</td><td class="num">1,082</td><td class="num">$25.27</td><td class="num">0.00</td><td class="num dim">&mdash;</td><td class="num">0.00%</td></tr>
+      <tr><td class="dim">Shopping</td><td class="num dim">0</td><td class="num dim">0</td><td class="num dim">0</td><td class="num dim">$0.00</td><td class="num dim">0.00</td><td class="num dim">&mdash;</td><td class="num dim">&mdash;</td></tr>
+      <tr><td class="dim">Smart</td><td class="num dim">0</td><td class="num dim">0</td><td class="num dim">0</td><td class="num dim">$0.00</td><td class="num dim">0.00</td><td class="num dim">&mdash;</td><td class="num dim">&mdash;</td></tr>
+    </tbody>
+  </table>
+  <div class="alert" style="margin-top: 18px;">
+    <strong>Where the money is working.</strong>
+    Search is the spend leader ($1,802, 60% of total) and produces the bulk of conversions (206.5). App campaigns are punching above their weight on conversion volume (190 conv. on $70 spend = $0.37/conv) — worth a closer look at what's being counted there. Display is delivering 86% of impressions ($396) but zero conversions; treat as awareness/branding, not acquisition. Demand Gen has 20,468 interactions for only 9 clicks &mdash; Demand Gen counts interactions (swipes/expands) separately from clicks, so the "Interactions" column reflects that.
+  </div>
+  <p class="note-line">Source: Google Ads &rarr; Campaign Report CSV export, pulled 2026-05-20. Monthly split not available from this report; if a Mar / Apr / May breakdown is needed, export with the date-segmented view.</p>
+</div>
+
+<h2>Internal-Database KPIs &mdash; OnlineCheckWriter</h2>
+<div class="placeholder-section">
+  <div class="placeholder-label">All columns populated from OCW product database (pulled 2026-05-20 / 2026-05-21)</div>
+  <p>These KPIs are OnlineCheckWriter-only. Signups, KYC Approved (individual verification), KYB Approved (business verification), and New Subscriptions come from the OCW product database (sources: <code>signup_weekly.csv</code>, <code>kyc approved list.csv</code>, <code>kyb approved list.csv</code>, <code>subscriptions weekly.csv</code>, pulled 2026-05-20). KYC Approved and KYB Approved cells now show the <strong>approved count</strong> on top and the <strong>approval rate</strong> (approved / (approved + rejected)) on the bottom — sources: <code>kyc approved list.csv</code> + <code>kyc_rejected.csv</code> and <code>kyb approved list.csv</code> + <code>kyb_rejected.csv</code>. Paying Checks and Paying Digital show <strong>unique paying users</strong> on the top line and <strong>total $ volume of successful transactions</strong> on the bottom line, per week (checks: PRINT/MAIL/EMAIL/DRAFT; digital: CC, ACH, VC, WIRE). Source: <code>sreekuttan_filtered_checks.xlsx</code> + <code>sreekuttan_filtered_non_checks.xlsx</code> (pulled 2026-05-21).</p>
+  <table>
+    <thead><tr>
+      <th>Period</th><th>Signups</th><th>KYC Approved (count / approval %)</th><th>KYB Approved (count / approval %)</th>
+      <th>New Subscriptions</th><th>Paying Checks (users / $)</th><th>Paying Digital (users / $)</th>
     </tr></thead>
     <tbody id="tbl-placeholder"></tbody>
   </table>
+  <div class="alert" style="margin-top: 16px;">
+    <strong>Funnel snapshot (Mar 20 – May 20, OCW only):</strong>
+    41,163 signups → 448 KYC approved of 690 reviewed (<strong>64.9% KYC approval rate</strong>) / 459 KYB approved of 726 reviewed (<strong>63.2% KYB approval rate</strong>) → 673 new subscriptions. KYC and KYB run nearly in lockstep (most signups go through both together). <strong>Signup → Subscription = 1.63%</strong> is the real paid-conversion rate; <strong>Signup → KYC-approved = 1.09%</strong> is the verified-customer rate. Subscriptions exceed KYC/KYB approvals (673 vs ~450) — either some plans don't require KYC, KYC happens after subscribing, or there's a timing lag between subscription start and verification completion. Worth confirming with product.
+  </div>
+  <div class="alert" style="margin-top: 12px;">
+    <strong>GA4 events vs internal DB — both directions of error:</strong>
+    GA4 <code>live-sign-up</code> shows 8,223 vs internal DB 41,163 signups (~5× under-fire — missing server-side / mobile / API signups). GA4 <code>live-upgrade-plan</code> shows 3,616 vs internal DB 616 subscriptions for W13–W20 (~6× over-fire — likely counting clicks/intent rather than completed payments). For headline reporting, use the Internal-DB columns. The GA4 event counts stay in the OCW Conversion Events table for tracking-health monitoring.
+  </div>
 </div>
 
 <h2 id="notes">Notes &amp; Data-Quality Caveats</h2>
@@ -250,17 +279,21 @@ td.num { font-variant-numeric: tabular-nums; }
     The <code>/login</code> page accounts for ~50% of OCW sessions. "New acquisition" is better represented by the <code>New Users</code> column or the trial-signup event. When discussing acquisition, prefer those over raw Sessions.
   </div>
   <div class="alert">
-    <strong>The latest period (May 2026 / W21) is partial.</strong>
-    Monthly view: May contains only data through May 17, so the May bar is roughly half a month. It will look low — that's expected. Weekly view: only complete weeks (W13-W20) are shown.
+    <strong>Reporting window is Mar 20 – May 20, 2026. Source granularity limits exact trimming.</strong>
+    The breakdown tables show 8 complete ISO weeks (W13–W20, Mar 23 – May 17), which sit entirely inside the window but exclude the 3 leading days (Mar 20–22, partial W12) and the 3 trailing days (May 18–20, partial W21). Internal-DB columns (Signups, KYC, KYB, Subscriptions) do have data for the W12 and W21 edge weeks — that data is included in the headline window totals (e.g., 41,163 signups, 673 subscriptions) but not the weekly breakdown rows below.
+  </div>
+  <div class="alert">
+    <strong>"Paid Search" in the GA4 channel-mix charts is a subset of total Ads activity.</strong>
+    The Google Ads account ran $2,986.29 in spend across Search, Display, Video, Demand Gen, App, and Performance Max (see the Google Ads section). The "Paid Search" channel in the OCW/ZM channel-mix charts only reflects GA4's attribution of sessions to the paid-search channel, so it will not match the full Ads click total (4,743). For platform-level Ads numbers, refer to the Google Ads section, not the channel-mix charts.
   </div>
   <h3 style="margin-top: 20px;">Methodology</h3>
   <p style="font-size:13px; color: var(--text-dim); margin: 0;">
-    Traffic data is pulled from the GA4 Data API with the country dimension filtered to "United States." Search data is pulled from the Google Search Console API with the country filter set to USA. Weekly view uses ISO weeks (Monday start, Sunday end), 8 complete weeks ending May 17, 2026. Monthly view uses calendar months from February through May 2026. Both OnlineCheckWriter and ZilMoney report in America/Chicago, so periods line up cleanly across brands.
+    Reporting window is Mar 20 – May 20, 2026 (matching the Google Ads export window). Traffic data is pulled from the GA4 Data API with the country dimension filtered to "United States." Search data is pulled from the Google Search Console API with the country filter set to USA. Breakdown tables use ISO weeks (Monday start, Sunday end): 8 complete weeks W13–W20 (Mar 23 – May 17) — the largest set of complete weeks fitting inside the window. Internal-DB sources (signups, KYC, KYB, subscriptions) have full weekly coverage including partial edge weeks W12 and W21, which are summed into the headline window totals but not shown as separate breakdown rows. Both OnlineCheckWriter and ZilMoney report in America/Chicago, so periods line up cleanly across brands.
   </p>
 </div>
 
 <div class="footer">
-  Source: GA4 Data API (US-only via <code>country=United States</code>) + Google Search Console API (US-only via <code>USA</code> country filter).
+  Reporting window: Mar 20 – May 20, 2026. Sources: GA4 Data API (US-only via <code>country=United States</code>) + Google Search Console API (US-only via <code>USA</code> country filter) + Google Ads Campaign Report CSV export.
   Pulled 2026-05-20. Re-runnable any time with no manual pipeline.
 </div>
 
@@ -285,6 +318,16 @@ const dataWeekly = {
     clicks:   [3751,4403,4240,4566,4247,4199,3685,3395],
     impr:     [281210,256045,252095,244040,196217,302982,276952,250842],
     signUp:   [774,857,1035,1047,1158,894,1135,1323],
+    dbSignUp: [4473,4777,4776,4625,4747,4599,4695,4762],
+    kycApproved: [57,46,50,46,51,49,66,49],
+    kycRejected: [31,31,25,31,25,18,27,30],
+    kybApproved: [60,47,52,45,51,50,66,53],
+    kybRejected: [33,34,28,31,29,21,33,32],
+    subscriptions: [91,61,85,83,74,85,74,63],
+    payingCk:    [0,1,20,33,35,60,60,70],
+    payingCkAmt: [0,250,172104.59,546129.57,40405436.75,2242706.07,984369.10,1641723.83],
+    payingD:     [16,14,21,23,21,41,45,34],
+    payingDAmt:  [230514.22,129371.19,110285.41,247094.35,395740.67,1149162.67,601170.25,1384630.00],
     upgrade:  [360,472,566,461,494,427,410,426],
     payCard:  [55,30,55,41,50,51,49,40],
     channels: {
@@ -315,110 +358,20 @@ const dataWeekly = {
   }
 };
 
-const dataMonthly = {
-  periods: [
-    {label:'Feb 2026', start:'Feb', partial:false},
-    {label:'Mar 2026', start:'Mar', partial:false},
-    {label:'Apr 2026', start:'Apr', partial:false},
-    {label:'May 2026', start:'May 1-17', partial:true}
-  ],
-  OCW: {
-    sessions: [107331,122767,119388,64943],
-    users:    [34442,35009,34836,20757],
-    newUsers: [28390,28716,28811,15897],
-    clicks:   [13193,15368,18641,8556],
-    impr:     [905173,1171053,1045995,657598],
-    signUp:   [3730,3837,4349,2874],
-    upgrade:  [1813,1771,2104,956],
-    payCard:  [192,208,202,100],
-    channels: {
-      Direct:           [81609,92485,95191,51904],
-      Referral:         [15832,17141,16863,9164],
-      'Organic Search': [5385,4514,3533,1745],
-      Unassigned:       [2963,4401,2928,913],
-      'Organic Video':  [541,712,668,413],
-      'Paid Search':    [615,467,80,149]
-    }
-  },
-  ZM: {
-    sessions: [12211,15287,12005,6467],
-    users:    [8292,9229,6955,3867],
-    newUsers: [7253,8026,6078,3264],
-    clicks:   [4816,5699,4681,2550],
-    impr:     [624138,781178,644522,384831],
-    contact:  [334,525,419,246],
-    lead:     [136,214,148,82],
-    channels: {
-      Direct:           [6921,8303,6850,3754],
-      'Organic Search': [2549,3206,2678,1614],
-      Referral:         [1010,1108,1067,553],
-      Unassigned:       [699,1246,791,324],
-      'Organic Social': [746,678,450,240],
-      Display:          [304,369,6,5]
-    }
-  }
-};
-
 const fmt = n => n.toLocaleString('en-US');
-const wowDelta = (cur, prev, partial) => {
-  if (prev === 0 && cur === 0) return {cls: 'flat', text: 'flat'};
-  if (prev === 0) return {cls: 'up', text: 'new'};
-  const pct = ((cur - prev) / prev) * 100;
-  const cls = pct > 1 ? 'up' : pct < -1 ? 'down' : 'flat';
-  const arrow = pct > 1 ? '▲' : pct < -1 ? '▼' : '●';
-  const suffix = partial ? ' vs previous (current period partial)' : '';
-  return {cls, text: arrow + ' ' + Math.abs(pct).toFixed(1) + '%' + suffix};
+const fmtUSD = n => '$' + Math.round(n).toLocaleString('en-US');
+const cellNumAmt = (n, amt) => fmt(n) + '<div class="dim" style="font-size:11px; font-weight:normal; margin-top:2px;">' + fmtUSD(amt) + '</div>';
+const cellApproval = (approved, rejected) => {
+  const total = approved + rejected;
+  const pct = total > 0 ? (approved / total * 100).toFixed(1) + '%' : '—';
+  return fmt(approved) + '<div class="dim" style="font-size:11px; font-weight:normal; margin-top:2px;">' + pct + '</div>';
 };
 
 let chartOverall, chartOcwCh, chartZmCh;
-let mode = 'weekly';
 
 function render() {
-  const D = mode === 'weekly' ? dataWeekly : dataMonthly;
+  const D = dataWeekly;
   const periods = D.periods;
-  const lastIdx = periods.length - 1;
-  const prevIdx = lastIdx - 1;
-  const partial = periods[lastIdx].partial;
-
-  document.getElementById('subtitle').textContent = mode === 'weekly'
-    ? 'Weekly view — 8 ISO weeks ending Sunday May 17, 2026 — US traffic only — OnlineCheckWriter + ZilMoney'
-    : 'Monthly view — Feb to May 2026 (May 1-17, partial) — US traffic only — OnlineCheckWriter + ZilMoney';
-  document.getElementById('kpi-heading').textContent = mode === 'weekly'
-    ? 'Headline KPIs (Week of May 11-17, 2026)'
-    : 'Headline KPIs (May 2026, partial through May 17)';
-
-  const periodLabel = mode === 'weekly' ? 'Week' : 'Month';
-  document.getElementById('ocw-period-th').textContent = periodLabel;
-  document.getElementById('zm-period-th').textContent = periodLabel;
-  document.getElementById('ocw-conv-th').textContent = periodLabel;
-  document.getElementById('zm-conv-th').textContent = periodLabel;
-  document.getElementById('ocw-tbl-heading').textContent = (mode === 'weekly' ? 'Weekly' : 'Monthly') + ' US Traffic + Search';
-  document.getElementById('zm-tbl-heading').textContent = (mode === 'weekly' ? 'Weekly' : 'Monthly') + ' US Traffic + Search';
-
-  const totalSessions = D.OCW.sessions[lastIdx] + D.ZM.sessions[lastIdx];
-  const totalSessionsPrev = D.OCW.sessions[prevIdx] + D.ZM.sessions[prevIdx];
-  const totalClicks = D.OCW.clicks[lastIdx] + D.ZM.clicks[lastIdx];
-  const totalClicksPrev = D.OCW.clicks[prevIdx] + D.ZM.clicks[prevIdx];
-
-  document.getElementById('kpi-sessions').innerHTML = fmt(totalSessions) + (partial ? ' <span class="partial-tag">partial</span>' : '');
-  document.getElementById('kpi-clicks').innerHTML = fmt(totalClicks) + (partial ? ' <span class="partial-tag">partial</span>' : '');
-  document.getElementById('kpi-signups').innerHTML = fmt(D.OCW.signUp[lastIdx]) + (partial ? ' <span class="partial-tag">partial</span>' : '');
-  document.getElementById('kpi-upgrades').innerHTML = fmt(D.OCW.upgrade[lastIdx]) + (partial ? ' <span class="partial-tag">partial</span>' : '');
-
-  const s_d = wowDelta(totalSessions, totalSessionsPrev, partial);
-  const c_d = wowDelta(totalClicks, totalClicksPrev, partial);
-  const u_d = wowDelta(D.OCW.signUp[lastIdx], D.OCW.signUp[prevIdx], partial);
-  const p_d = wowDelta(D.OCW.upgrade[lastIdx], D.OCW.upgrade[prevIdx], partial);
-  const cmpLabel = mode === 'weekly' ? ' week over week' : ' month over month';
-  const apply = (id, d) => {
-    const el = document.getElementById(id);
-    el.className = 'kpi-delta ' + d.cls;
-    el.textContent = d.text.includes('vs previous') ? d.text : d.text + cmpLabel;
-  };
-  apply('kpi-sessions-d', s_d);
-  apply('kpi-clicks-d', c_d);
-  apply('kpi-signups-d', u_d);
-  apply('kpi-upgrades-d', p_d);
 
   function trafficRows(tbodyId, d) {
     document.getElementById(tbodyId).innerHTML = periods.map((p, i) => {
@@ -454,14 +407,17 @@ function render() {
       '<td class="num">' + fmt(D.ZM.lead[i]) + '</td></tr>';
   }).join('');
 
-  const brands = ['OnlineCheckWriter', 'ZilMoney'];
-  let phRows = '';
-  periods.forEach(p => {
-    brands.forEach(b => {
-      phRows += '<tr><td>' + p.label + '</td><td>' + b + '</td>' + '<td class="empty">&mdash;</td>'.repeat(8) + '</tr>';
-    });
-  });
-  document.getElementById('tbl-placeholder').innerHTML = phRows;
+  document.getElementById('tbl-placeholder').innerHTML = periods.map((p, i) => {
+    const cls = p.partial ? ' class="partial"' : '';
+    const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
+    return '<tr' + cls + '><td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
+      '<td class="num">' + fmt(D.OCW.dbSignUp[i]) + '</td>' +
+      '<td class="num">' + cellApproval(D.OCW.kycApproved[i], D.OCW.kycRejected[i]) + '</td>' +
+      '<td class="num">' + cellApproval(D.OCW.kybApproved[i], D.OCW.kybRejected[i]) + '</td>' +
+      '<td class="num">' + fmt(D.OCW.subscriptions[i]) + '</td>' +
+      '<td class="num">' + cellNumAmt(D.OCW.payingCk[i], D.OCW.payingCkAmt[i]) + '</td>' +
+      '<td class="num">' + cellNumAmt(D.OCW.payingD[i], D.OCW.payingDAmt[i]) + '</td></tr>';
+  }).join('');
 
   drawCharts(D);
 }
@@ -516,25 +472,6 @@ function drawCharts(D) {
   chartOcwCh = channelChart('chart-ocw-channels', D.OCW.channels);
   chartZmCh = channelChart('chart-zm-channels', D.ZM.channels);
 }
-
-document.getElementById('btn-weekly').addEventListener('click', () => {
-  if (mode === 'weekly') return;
-  mode = 'weekly';
-  document.getElementById('btn-weekly').classList.add('active');
-  document.getElementById('btn-weekly').setAttribute('aria-selected', 'true');
-  document.getElementById('btn-monthly').classList.remove('active');
-  document.getElementById('btn-monthly').setAttribute('aria-selected', 'false');
-  render();
-});
-document.getElementById('btn-monthly').addEventListener('click', () => {
-  if (mode === 'monthly') return;
-  mode = 'monthly';
-  document.getElementById('btn-monthly').classList.add('active');
-  document.getElementById('btn-monthly').setAttribute('aria-selected', 'true');
-  document.getElementById('btn-weekly').classList.remove('active');
-  document.getElementById('btn-weekly').setAttribute('aria-selected', 'false');
-  render();
-});
 
 render();
 </script>
