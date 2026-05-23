@@ -107,12 +107,17 @@ td.num { font-variant-numeric: tabular-nums; }
   </div>
 </header>
 
+<div class="alert" style="background: #ffd6cc; border-color: #cf222e; border-left-width: 4px;">
+  <strong>CRITICAL TRACKING GAP: OnlineCheckWriter marketing site is not in GA4.</strong>
+  Of all OCW US activity in the GA4 property (254458280), <strong>99.97% comes from the logged-in app at live.onlinecheckwriter.com</strong> — only 12 new users (23 sessions) over the full window came from the public marketing site at onlinecheckwriter.com. Yet Google Search Console reports 32,486 organic clicks landing on the marketing site in the same window. The marketing site's homepage HTML contains the Google Ads conversion tag (<code>AW-871139145</code>) but <strong>no GA4 measurement ID</strong>. Every figure labeled "OCW Sessions" below is essentially app-usage data (existing customers logging in), not marketing-acquisition data. <strong>Fix:</strong> install GA4 via Site Kit on the OCW marketing WordPress (~10 min). Reddit pixel data (further down) is the best independent measure of marketing-site activity until the fix lands.
+</div>
+
 <h2 id="kpi-heading">Headline KPIs — Window Total (Mar 20 to May 20, 2026)</h2>
 <div class="kpi-grid">
   <div class="kpi-card">
-    <div class="kpi-label">Total US Sessions</div>
+    <div class="kpi-label">Total US Sessions (GA4)</div>
     <div class="kpi-value">241,294</div>
-    <div class="kpi-delta flat">OCW 218,703 &middot; ZM 22,591</div>
+    <div class="kpi-delta down">OCW 218,703 (mostly app logins) &middot; ZM 22,591</div>
   </div>
   <div class="kpi-card">
     <div class="kpi-label">Total US Search Clicks (GSC)</div>
@@ -301,7 +306,32 @@ td.num { font-variant-numeric: tabular-nums; }
   </div>
 </div>
 
-<h2>Google Ads (Paid Campaigns)</h2>
+<h2>Paid Advertising (Multi-Channel)</h2>
+<div class="kpi-grid" style="margin-bottom: 24px;">
+  <div class="kpi-card">
+    <div class="kpi-label">Total Paid Spend (Window)</div>
+    <div class="kpi-value">$6,348.38</div>
+    <div class="kpi-delta flat">Google $2,986 &middot; Reddit $3,362</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Total Paid Clicks (Window)</div>
+    <div class="kpi-value">7,080</div>
+    <div class="kpi-delta flat">Google 4,743 &middot; Reddit 2,337</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Paid CAC (Subscriptions)</div>
+    <div class="kpi-value">$9.43</div>
+    <div class="kpi-delta flat">$6,348 &divide; 673 new subs</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Paid CAC (Verified Signups)</div>
+    <div class="kpi-value">$0.50</div>
+    <div class="kpi-delta flat">$6,348 &divide; 12,710 verified</div>
+  </div>
+</div>
+<div class="alert">
+  <strong>Attribution warning:</strong> Of the $6,348 paid spend, only Google Ads ($2,986, 47%) is properly URL-tagged so GA4 can attribute it. Reddit Ads URLs are <strong>not UTM-tagged</strong>, so the 2,337 Reddit clicks land in the GA4 "(direct)" bucket — invisible to channel attribution. Outbrain, Facebook, and X pixels also fire on the site but their spend is not yet captured in this dashboard. <strong>True multi-channel CAC cannot be computed until all paid URLs are tagged with <code>utm_source</code>/<code>utm_medium</code>.</strong>
+</div>
 <div class="brand-section">
   <div class="brand-header">
     <div>
@@ -354,6 +384,80 @@ td.num { font-variant-numeric: tabular-nums; }
   <p class="note-line">Source: Google Ads &rarr; Campaign Report CSV export, pulled 2026-05-20. Monthly split not available from this report; if a Mar / Apr / May breakdown is needed, export with the date-segmented view.</p>
 </div>
 
+<div class="brand-section">
+  <div class="brand-header">
+    <div>
+      <div class="brand-name">Reddit Ads Account (OCWZM)</div>
+      <div class="brand-tag">Pixel a2_g00dkqjaa0mf &middot; pulled live via Playwright 2026-05-23</div>
+    </div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Spend (Mar 23 – May 17)</div>
+      <div class="kpi-value">$3,362.09</div>
+      <div class="kpi-delta flat">100% US-targeted</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Impressions</div>
+      <div class="kpi-value">395,248</div>
+      <div class="kpi-delta flat">CTR 0.591%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Clicks</div>
+      <div class="kpi-value">2,337</div>
+      <div class="kpi-delta flat">CPC $1.44 (vs Google $0.63)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Active Campaigns in Window</div>
+      <div class="kpi-value">1 of 3</div>
+      <div class="kpi-delta down">Only "mail check ocw" ran; now paused</div>
+    </div>
+  </div>
+  <h3 style="margin-top: 22px;">Lifetime Reddit Ads (Nov 1, 2024 – May 23, 2026)</h3>
+  <table>
+    <thead><tr><th>Metric</th><th>Lifetime</th></tr></thead>
+    <tbody>
+      <tr><td>Impressions</td><td class="num">7,837,099</td></tr>
+      <tr><td>Clicks</td><td class="num">25,512</td></tr>
+      <tr><td>Spend</td><td class="num">$20,170.18</td></tr>
+      <tr><td>CPC</td><td class="num">$0.79</td></tr>
+      <tr><td>CTR</td><td class="num">0.326%</td></tr>
+    </tbody>
+  </table>
+  <div class="alert" style="margin-top: 16px;">
+    <strong>Reddit is more expensive per click than Google but invisible to attribution.</strong>
+    CPC of $1.44 in window (2.3&times; Google Search CPC of $0.63). Campaign was a "Traffic" objective, not Conversion, so Reddit doesn't report downstream conversions. Worse: <strong>landing URLs were not UTM-tagged</strong>, so the 2,337 clicks vanish into GA4's "(direct)" bucket. Across lifetime: GA4 has only ~7,938 sessions tagged "reddit" vs 25,512 lifetime Reddit clicks — <strong>69% of Reddit-driven traffic is unattributed in GA4</strong>. Until tagging is fixed, no real CAC math is possible for Reddit.
+  </div>
+  <p class="note-line">All 3 campaigns currently Inactive/paused. "mail check ocw Traffic Campaign" drove 100% of in-window spend before being paused. Re-launching without proper UTM tagging will continue the attribution gap.</p>
+</div>
+
+<h2>Marketing-Site Traffic — Reddit Pixel Cross-Check</h2>
+<div class="brand-section">
+  <div class="alert">
+    <strong>Why this section exists.</strong> Because OCW marketing-site GA4 tracking is broken (see top-of-page alert), the Reddit pixel becomes our best independent counter of marketing-site activity. The pixel fires on every page load across both brands. <strong>Cannot break out by country</strong> (Reddit doesn't expose IP-geo in the UI) and <strong>cannot distinguish first-visit from repeat</strong> (every page load fires the pixel). Use this for volume signal only.
+  </div>
+  <h3 style="margin-top: 16px;">PageVisit events by domain (Mar 23 – May 17)</h3>
+  <table>
+    <thead><tr><th>Domain</th><th>Pixel Events</th><th>Share</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>live.onlinecheckwriter.com</td><td class="num">344,172</td><td class="num">59.6%</td><td>OCW logged-in app</td></tr>
+      <tr><td><strong>onlinecheckwriter.com</strong></td><td class="num"><strong>190,008</strong></td><td class="num"><strong>32.9%</strong></td><td><strong>OCW marketing site</strong></td></tr>
+      <tr><td>zilmoney.com</td><td class="num">41,889</td><td class="num">7.3%</td><td>ZM marketing site</td></tr>
+      <tr><td>www.onlinecheckwriter.com</td><td class="num">805</td><td class="num">0.1%</td><td>OCW marketing (www variant)</td></tr>
+      <tr><td class="dim">Low-traffic / undetectable</td><td class="num dim">653</td><td class="num dim">0.1%</td><td class="dim">Subdomain noise</td></tr>
+      <tr style="font-weight:600; border-top:2px solid var(--border);"><td>Total</td><td class="num">577,527</td><td class="num">100%</td><td>All combined</td></tr>
+    </tbody>
+  </table>
+  <div class="alert" style="margin-top: 16px;">
+    <strong>Marketing-only ratio: OCW is ~4.6&times; ZM.</strong> OCW marketing events 190,813 vs ZM marketing 41,889 — closer to gut intuition of OCW being 7–8&times; ZM than what (broken) GA4 numbers suggested. These are total page loads not unique visitors; rough estimate of OCW marketing first-time visitors is <strong>~35K–40K</strong> in 8 weeks (based on ~3.5 pages/session and ~65% new-visitor share).
+  </div>
+  <div class="alert" style="margin-top: 12px;">
+    <strong>Independent first-visit-from-organic measure (GSC):</strong>
+    Google Search Console reports 32,486 US organic clicks to OCW marketing site and 8,959 to ZilMoney in the window. Each click = one first-visit entry. This is the most reliable independent acquisition number we currently have until GA4 is restored on the OCW marketing site.
+  </div>
+  <p class="note-line">Source: Reddit Ads Events Manager → Page Visit → Domains tab, pulled live via Playwright 2026-05-23.</p>
+</div>
+
 <h2>Internal-Database KPIs &mdash; OnlineCheckWriter</h2>
 <div class="placeholder-section">
   <div class="placeholder-label">All columns populated from OCW product database (pulled 2026-05-20 / 2026-05-21)</div>
@@ -382,13 +486,25 @@ td.num { font-variant-numeric: tabular-nums; }
 <h2 id="notes">Notes &amp; Data-Quality Caveats</h2>
 <div class="brand-section">
   <h3>Tracking gaps to be aware of</h3>
+  <div class="alert" style="border-left: 3px solid var(--bad);">
+    <strong>OCW marketing site is not in GA4 (most important gap).</strong>
+    Property 254458280 tracks <code>live.onlinecheckwriter.com</code> (the logged-in app) but not the marketing site <code>onlinecheckwriter.com</code>. Of all US new users in the property, only 12 came from the marketing-site hostname despite GSC reporting 32,486 organic clicks. Marketing-site HTML contains <code>AW-871139145</code> (Google Ads conversion) but no <code>G-XXXXXXXXXX</code> measurement ID. Fix: install GA4 via Site Kit on OCW marketing WordPress (~10 min).
+  </div>
+  <div class="alert" style="border-left: 3px solid var(--bad);">
+    <strong>Non-Google paid URLs are not UTM-tagged.</strong>
+    Reddit Ads (2,337 in-window clicks, 25,512 lifetime) land in GA4 "(direct)" because <code>utm_source=reddit</code> isn't set on landing URLs. Outbrain, Facebook, X pixels also fire but their landing URLs are unverified. <strong>Until paid URLs are tagged, channel CAC cannot be computed for ~half the paid spend.</strong>
+  </div>
   <div class="alert">
     <strong>ZilMoney signup event is unreliable.</strong>
     The dedicated signup event (<code>singup_zm</code>) fires fewer than 1 time per week. The dashboard uses <code>contact_button_click</code> and <code>generate_lead</code> as lead proxies. Authoritative ZilMoney signup numbers should come from the product database.
   </div>
   <div class="alert">
     <strong>OCW sessions are heavily weighted toward existing-user logins.</strong>
-    The <code>/login</code> page accounts for ~50% of OCW sessions. "New acquisition" is better represented by the <code>New Users</code> column or the trial-signup event. When discussing acquisition, prefer those over raw Sessions.
+    The <code>/login</code> page accounts for ~50% of OCW sessions in property 254458280 — actually, 99.97% of OCW US new users in that property came from <code>live.onlinecheckwriter.com</code>. "New acquisition" cannot be measured from the OCW GA4 property as currently configured. Use GSC clicks + Reddit pixel volume as proxies until GA4 marketing-site tag is installed.
+  </div>
+  <div class="alert">
+    <strong>Reddit pixel cross-check confirms GA4 traffic counts are NOT inflated.</strong>
+    Reddit pixel sees 577,527 PageVisit events combined (OCW + ZM) Mar 23 – May 17. GA4 sees 1,866,924 pageviews (3.2&times; more). GA4 is the more complete counter — ad-blockers block Reddit pixel more aggressively, and GA4 enhanced measurement fires additional events. Reddit pixel under-counts; it does not over-count.
   </div>
   <div class="alert">
     <strong>Reporting window is Mar 20 – May 20, 2026. Source granularity limits exact trimming.</strong>
