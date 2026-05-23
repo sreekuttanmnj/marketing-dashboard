@@ -125,6 +125,11 @@ td.num { font-variant-numeric: tabular-nums; }
     <div class="kpi-delta flat">Mar 20 – May 20 · product database</div>
   </div>
   <div class="kpi-card">
+    <div class="kpi-label">OCW Verified Signups (Email/SMS)</div>
+    <div class="kpi-value">12,710</div>
+    <div class="kpi-delta down">~30% verification rate · 70% drop-off</div>
+  </div>
+  <div class="kpi-card">
     <div class="kpi-label">OCW New Subscriptions (Internal DB)</div>
     <div class="kpi-value">673</div>
     <div class="kpi-delta flat">Mar 20 – May 20 · Signup→Sub 1.63%</div>
@@ -355,14 +360,18 @@ td.num { font-variant-numeric: tabular-nums; }
   <p>These KPIs are OnlineCheckWriter-only. Signups, KYC Approved (individual verification), KYB Approved (business verification), and New Subscriptions come from the OCW product database (sources: <code>signup_weekly.csv</code>, <code>kyc approved list.csv</code>, <code>kyb approved list.csv</code>, <code>subscriptions weekly.csv</code>, pulled 2026-05-20). KYC Approved and KYB Approved cells now show the <strong>approved count</strong> on top and the <strong>approval rate</strong> (approved / (approved + rejected)) on the bottom — sources: <code>kyc approved list.csv</code> + <code>kyc_rejected.csv</code> and <code>kyb approved list.csv</code> + <code>kyb_rejected.csv</code>. Paying Checks and Paying Digital show <strong>unique paying users</strong> on the top line and <strong>total $ volume of successful transactions</strong> on the bottom line, per week (checks: PRINT/MAIL/EMAIL/DRAFT; digital: CC, ACH, VC, WIRE). Source: <code>sreekuttan_filtered_checks.xlsx</code> + <code>sreekuttan_filtered_non_checks.xlsx</code> (pulled 2026-05-21).</p>
   <table>
     <thead><tr>
-      <th>Period</th><th>Signups</th><th>KYC Approved (count / approval %)</th><th>KYB Approved (count / approval %)</th>
+      <th>Period</th><th>Signups</th><th>Verified (Email/SMS) count / rate</th><th>KYC Approved (count / approval %)</th><th>KYB Approved (count / approval %)</th>
       <th>New Subscriptions</th><th>Paying Checks (users / $)</th><th>Paying Digital (users / $)</th>
     </tr></thead>
     <tbody id="tbl-placeholder"></tbody>
   </table>
   <div class="alert" style="margin-top: 16px;">
     <strong>Funnel snapshot (Mar 20 – May 20, OCW only):</strong>
-    41,163 signups → 448 KYC approved of 690 reviewed (<strong>64.9% KYC approval rate</strong>) / 459 KYB approved of 726 reviewed (<strong>63.2% KYB approval rate</strong>) → 673 new subscriptions. KYC and KYB run nearly in lockstep (most signups go through both together). <strong>Signup → Subscription = 1.63%</strong> is the real paid-conversion rate; <strong>Signup → KYC-approved = 1.09%</strong> is the verified-customer rate. Subscriptions exceed KYC/KYB approvals (673 vs ~450) — either some plans don't require KYC, KYC happens after subscribing, or there's a timing lag between subscription start and verification completion. Worth confirming with product.
+    41,163 signups → <strong>12,710 verified via Email/SMS (~30.9% verification rate)</strong> → 448 KYC approved of 690 reviewed (<strong>64.9% KYC approval rate</strong>) / 459 KYB approved of 726 reviewed (<strong>63.2% KYB approval rate</strong>) → 673 new subscriptions. KYC and KYB run nearly in lockstep (most signups go through both together). <strong>The biggest leak is at verification</strong> — 70% of signups never confirm their email or phone. <strong>Signup → Subscription = 1.63%</strong> is the real paid-conversion rate; <strong>Verified → Subscription = 5.3%</strong> shows the real conversion is much healthier once we filter out the unverified noise. Subscriptions exceed KYC/KYB approvals (673 vs ~450) — either some plans don't require KYC, KYC happens after subscribing, or there's a timing lag. Worth confirming with product.
+  </div>
+  <div class="alert" style="margin-top: 12px;">
+    <strong>Verification-rate anomalies in W16 and W20.</strong>
+    W16 (Apr 13) shows only 489 verified vs the 1,500–1,800 weekly norm (10.6% verify rate vs ~36% baseline). W20 (May 11) shows 910 (19.1% rate). Either the verification flow had outages those weeks or the data extraction is incomplete. Worth confirming with engineering before treating either week as a real signal.
   </div>
   <div class="alert" style="margin-top: 12px;">
     <strong>GA4 events vs internal DB — both directions of error:</strong>
@@ -431,6 +440,7 @@ const dataWeekly = {
     payingCkAmt: [0,250,172104.59,546129.57,40405436.75,2242706.07,984369.10,1641723.83],
     payingD:     [16,14,21,23,21,41,45,34],
     payingDAmt:  [230514.22,129371.19,110285.41,247094.35,395740.67,1149162.67,601170.25,1384630.00],
+    verifiedSignups: [1737,1705,1814,489,1618,1585,1498,910],
     upgrade:  [360,472,566,461,494,427,410,426],
     payCard:  [55,30,55,41,50,51,49,40],
     engagementRate: [0.852,0.905,0.777,0.768,0.772,0.767,0.771,0.775],
@@ -649,8 +659,11 @@ function render() {
   document.getElementById('tbl-placeholder').innerHTML = periods.map((p, i) => {
     const cls = p.partial ? ' class="partial"' : '';
     const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
+    const verifyRate = (D.OCW.verifiedSignups[i] / D.OCW.dbSignUp[i] * 100).toFixed(1) + '%';
+    const verifyCell = fmt(D.OCW.verifiedSignups[i]) + '<div class="dim" style="font-size:11px; font-weight:normal; margin-top:2px;">' + verifyRate + '</div>';
     return '<tr' + cls + '><td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
       '<td class="num">' + fmt(D.OCW.dbSignUp[i]) + '</td>' +
+      '<td class="num">' + verifyCell + '</td>' +
       '<td class="num">' + cellApproval(D.OCW.kycApproved[i], D.OCW.kycRejected[i]) + '</td>' +
       '<td class="num">' + cellApproval(D.OCW.kybApproved[i], D.OCW.kybRejected[i]) + '</td>' +
       '<td class="num">' + fmt(D.OCW.subscriptions[i]) + '</td>' +
