@@ -129,6 +129,16 @@ td.num { font-variant-numeric: tabular-nums; }
     <div class="kpi-value">673</div>
     <div class="kpi-delta flat">Mar 20 – May 20 · Signup→Sub 1.63%</div>
   </div>
+  <div class="kpi-card">
+    <div class="kpi-label">OCW Engagement Rate (US, GA4)</div>
+    <div class="kpi-value">79.8%</div>
+    <div class="kpi-delta flat">Avg session 9:28 · sessions-weighted</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">ZM Engagement Rate (US, GA4)</div>
+    <div class="kpi-value">63.1%</div>
+    <div class="kpi-delta flat">Avg session 3:39 · sessions-weighted</div>
+  </div>
 </div>
 <div class="note-line">Sessions and Search Clicks are summed over the 8 complete ISO weeks (W13–W20: Mar 23 – May 17) — edges Mar 20–22 and May 18–20 excluded because GA4/GSC only deliver complete-ISO-week data. OCW Signups and New Subscriptions are from the internal product database, which has full weekly coverage including partial edge weeks, so they reflect the true Mar 20 – May 20 totals. Methodology and tracking caveats at the <a href="#notes">bottom of this report</a>.</div>
 
@@ -164,6 +174,27 @@ td.num { font-variant-numeric: tabular-nums; }
     <thead><tr><th id="ocw-conv-th">Week</th><th>Trial Signups (live-sign-up)</th><th>Paid Upgrades (live-upgrade-plan)</th><th>Card Payments (live-pay-card)</th></tr></thead>
     <tbody id="tbl-ocw-conv"></tbody>
   </table>
+  <h3 style="margin-top: 24px;">Engagement Quality (GA4, US-filtered)</h3>
+  <table>
+    <thead><tr><th>Week</th><th>Engagement Rate</th><th>Avg Session Duration</th></tr></thead>
+    <tbody id="tbl-ocw-eng"></tbody>
+  </table>
+  <div class="grid-2" style="margin-top: 24px;">
+    <div>
+      <h3>Top US Organic Search Queries</h3>
+      <table>
+        <thead><tr><th>Query</th><th>Clicks</th><th>Impr.</th><th>CTR</th><th>Pos.</th></tr></thead>
+        <tbody id="tbl-ocw-queries"></tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Top US Organic Landing Pages</h3>
+      <table>
+        <thead><tr><th>Page</th><th>Clicks</th><th>CTR</th><th>Pos.</th></tr></thead>
+        <tbody id="tbl-ocw-pages"></tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="brand-section">
@@ -191,6 +222,27 @@ td.num { font-variant-numeric: tabular-nums; }
     <thead><tr><th id="zm-conv-th">Week</th><th>Contact-Button Clicks</th><th>Lead Form Submissions</th></tr></thead>
     <tbody id="tbl-zm-conv"></tbody>
   </table>
+  <h3 style="margin-top: 24px;">Engagement Quality (GA4, US-filtered)</h3>
+  <table>
+    <thead><tr><th>Week</th><th>Engagement Rate</th><th>Avg Session Duration</th></tr></thead>
+    <tbody id="tbl-zm-eng"></tbody>
+  </table>
+  <div class="grid-2" style="margin-top: 24px;">
+    <div>
+      <h3>Top US Organic Search Queries</h3>
+      <table>
+        <thead><tr><th>Query</th><th>Clicks</th><th>Impr.</th><th>CTR</th><th>Pos.</th></tr></thead>
+        <tbody id="tbl-zm-queries"></tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Top US Organic Landing Pages</h3>
+      <table>
+        <thead><tr><th>Page</th><th>Clicks</th><th>CTR</th><th>Pos.</th></tr></thead>
+        <tbody id="tbl-zm-pages"></tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <h2>Google Ads (Paid Campaigns)</h2>
@@ -330,6 +382,52 @@ const dataWeekly = {
     payingDAmt:  [230514.22,129371.19,110285.41,247094.35,395740.67,1149162.67,601170.25,1384630.00],
     upgrade:  [360,472,566,461,494,427,410,426],
     payCard:  [55,30,55,41,50,51,49,40],
+    engagementRate: [0.852,0.905,0.777,0.768,0.772,0.767,0.771,0.775],
+    avgDuration:    [582,574,575,528,557,568,585,573],
+    topQueries: [
+      {q:"online check writer",clicks:4117,impr:7900,ctr:0.521,pos:1.28},
+      {q:"onlinecheckwriter",clicks:2864,impr:5087,ctr:0.563,pos:1.00},
+      {q:"check writer",clicks:909,impr:3592,ctr:0.253,pos:3.76},
+      {q:"checkwriter",clicks:562,impr:1819,ctr:0.309,pos:2.08},
+      {q:"check writer online",clicks:429,impr:894,ctr:0.480,pos:1.29},
+      {q:"free check printing software",clicks:235,impr:1652,ctr:0.142,pos:4.89},
+      {q:"checkwriters",clicks:192,impr:14079,ctr:0.014,pos:3.69},
+      {q:"onlinecheckwriter.com",clicks:173,impr:332,ctr:0.521,pos:1.00},
+      {q:"write checks online",clicks:141,impr:797,ctr:0.177,pos:4.42},
+      {q:"online checkwriter",clicks:128,impr:294,ctr:0.435,pos:3.46},
+      {q:"online check writer free",clicks:127,impr:395,ctr:0.322,pos:1.79},
+      {q:"check maker",clicks:114,impr:1155,ctr:0.099,pos:6.90},
+      {q:"check printing software",clicks:102,impr:3449,ctr:0.030,pos:11.26},
+      {q:"online check writter",clicks:96,impr:170,ctr:0.565,pos:1.00},
+      {q:"print checks online",clicks:84,impr:1542,ctr:0.054,pos:10.56},
+      {q:"print checks online free",clicks:81,impr:590,ctr:0.137,pos:5.62},
+      {q:"online check",clicks:79,impr:1419,ctr:0.056,pos:2.51},
+      {q:"onlinecheckwritter",clicks:74,impr:127,ctr:0.583,pos:1.00},
+      {q:"free check printing template",clicks:67,impr:403,ctr:0.166,pos:2.55},
+      {q:"checkwritter",clicks:65,impr:142,ctr:0.458,pos:1.12}
+    ],
+    topPages: [
+      {p:"/",clicks:10975,impr:125207,ctr:0.088,pos:14.94},
+      {p:"/free-check-printing/",clicks:942,impr:77927,ctr:0.012,pos:9.69},
+      {p:"/check-printing-software-free/",clicks:694,impr:57465,ctr:0.012,pos:6.15},
+      {p:"/instant-checks/",clicks:430,impr:88230,ctr:0.005,pos:35.03},
+      {p:"/blank-checks/",clicks:380,impr:33321,ctr:0.011,pos:17.82},
+      {p:"/check-template/",clicks:271,impr:16300,ctr:0.017,pos:20.00},
+      {p:"/personal-checks/",clicks:233,impr:73740,ctr:0.003,pos:23.67},
+      {p:"/free-blank-check-templates-for-personal-use/",clicks:211,impr:6284,ctr:0.034,pos:23.46},
+      {p:"/echeck/",clicks:194,impr:36446,ctr:0.005,pos:18.38},
+      {p:"/deposit-slip/",clicks:184,impr:7209,ctr:0.026,pos:29.66},
+      {p:"/email-check/",clicks:175,impr:12127,ctr:0.014,pos:8.50},
+      {p:"/best-check-printing-free-software-for-small-businesses/",clicks:136,impr:36414,ctr:0.004,pos:9.04},
+      {p:"/what-is-a-blank-check/",clicks:134,impr:42410,ctr:0.003,pos:4.80},
+      {p:"/deposit-slips-what-it-is-why-it-still-matters-and-how-to-automate-it-in-2025/",clicks:133,impr:7150,ctr:0.019,pos:15.40},
+      {p:"/check-printing-online/",clicks:120,impr:8168,ctr:0.015,pos:17.51},
+      {p:"/mail-checks/",clicks:115,impr:16148,ctr:0.007,pos:19.53},
+      {p:"/print-checks/",clicks:112,impr:19424,ctr:0.006,pos:6.97},
+      {p:"/checkbook-register/",clicks:110,impr:9489,ctr:0.012,pos:14.67},
+      {p:"/digital-checks/",clicks:107,impr:18671,ctr:0.006,pos:9.04},
+      {p:"/free-check-printing-software/",clicks:90,impr:8775,ctr:0.010,pos:21.44}
+    ],
     channels: {
       Direct:           [18729,21131,21071,22787,21306,21802,22741,22825],
       Referral:         [3391,3927,3654,3883,3908,4054,3978,4098],
@@ -347,6 +445,52 @@ const dataWeekly = {
     impr:     [186815,161025,148612,137069,135537,180414,173030,144675],
     contact:  [91,147,87,92,105,102,79,136],
     lead:     [50,24,50,20,30,44,30,42],
+    engagementRate: [0.664,0.600,0.628,0.629,0.647,0.618,0.643,0.615],
+    avgDuration:    [197,220,188,248,225,198,243,235],
+    topQueries: [
+      {q:"zil money",clicks:1926,impr:2940,ctr:0.655,pos:1.09},
+      {q:"zilmoney",clicks:993,impr:1587,ctr:0.626,pos:1.00},
+      {q:"routing number on check",clicks:313,impr:133469,ctr:0.002,pos:2.10},
+      {q:"zill money",clicks:79,impr:126,ctr:0.627,pos:1.00},
+      {q:"online check writer",clicks:58,impr:6445,ctr:0.009,pos:6.54},
+      {q:"zil money corporation",clicks:49,impr:158,ctr:0.310,pos:1.44},
+      {q:"zil",clicks:48,impr:14402,ctr:0.003,pos:5.92},
+      {q:"check routing number",clicks:46,impr:17320,ctr:0.003,pos:2.23},
+      {q:"bank routing number on check",clicks:41,impr:4941,ctr:0.008,pos:2.83},
+      {q:"zillmoney",clicks:41,impr:89,ctr:0.461,pos:3.38},
+      {q:"routing number on a check",clicks:38,impr:28542,ctr:0.001,pos:3.57},
+      {q:"free check printing software",clicks:35,impr:1525,ctr:0.023,pos:7.92},
+      {q:"pay with echeck online instantly",clicks:35,impr:559,ctr:0.063,pos:4.33},
+      {q:"routing number on checks",clicks:29,impr:10501,ctr:0.003,pos:5.30},
+      {q:"pay with check online shopping instantly",clicks:28,impr:391,ctr:0.072,pos:1.58},
+      {q:"zil payment",clicks:26,impr:77,ctr:0.338,pos:1.40},
+      {q:"send echeck online instantly",clicks:25,impr:348,ctr:0.072,pos:11.84},
+      {q:"zilbank",clicks:25,impr:120,ctr:0.208,pos:3.81},
+      {q:"free check generator front and back",clicks:23,impr:380,ctr:0.061,pos:4.61},
+      {q:"zil bank",clicks:23,impr:106,ctr:0.217,pos:3.84}
+    ],
+    topPages: [
+      {p:"/",clicks:3181,impr:24089,ctr:0.132,pos:5.06},
+      {p:"/where-is-the-routing-number-on-your-check-located/",clicks:370,impr:160164,ctr:0.002,pos:4.46},
+      {p:"/how-to-identify-your-check-routing-number-and-make-electronic-money-transfers-securely/",clicks:348,impr:121482,ctr:0.003,pos:3.00},
+      {p:"/write-check-free/",clicks:234,impr:45749,ctr:0.005,pos:7.64},
+      {p:"/need-to-pay-someone-today-send-a-digital-check-in-minutes/",clicks:192,impr:14412,ctr:0.013,pos:9.63},
+      {p:"/writing-check-online/",clicks:108,impr:14844,ctr:0.007,pos:11.63},
+      {p:"/checks/",clicks:90,impr:5584,ctr:0.016,pos:8.85},
+      {p:"/best-free-check-printing-software-a-smart-choice-for-small-business-owners/",clicks:77,impr:24942,ctr:0.003,pos:8.50},
+      {p:"/pay-by-credit-card/",clicks:67,impr:8168,ctr:0.008,pos:7.34},
+      {p:"/instant-free-check-generator-easily-design-and-print-online-in-minutes/",clicks:58,impr:1742,ctr:0.033,pos:25.09},
+      {p:"/payroll-by-credit-card/",clicks:53,impr:2711,ctr:0.020,pos:8.23},
+      {p:"/check-printing-free/",clicks:40,impr:6095,ctr:0.007,pos:31.20},
+      {p:"/bank-of-america-free-checks-instantly-enhance-financial-management/",clicks:39,impr:10160,ctr:0.004,pos:18.54},
+      {p:"/contact/",clicks:36,impr:5642,ctr:0.006,pos:1.77},
+      {p:"/unleash-financial-freedom-free-check-printing-with-customized-templates/",clicks:31,impr:5581,ctr:0.006,pos:12.65},
+      {p:"/instant-voided-check-online-secure-and-effortless-creation/",clicks:30,impr:2159,ctr:0.014,pos:12.32},
+      {p:"/print-check-online-free/",clicks:29,impr:3874,ctr:0.007,pos:24.90},
+      {p:"/online-check-printing/",clicks:28,impr:3713,ctr:0.008,pos:23.86},
+      {p:"/simplify-finances-with-free-check-generator/",clicks:27,impr:1707,ctr:0.016,pos:19.71},
+      {p:"/about/",clicks:26,impr:4356,ctr:0.006,pos:1.60}
+    ],
     channels: {
       Direct:           [1654,1913,1495,1498,1489,1541,1633,1606],
       'Organic Search': [610,616,614,613,629,677,748,651],
@@ -360,6 +504,12 @@ const dataWeekly = {
 
 const fmt = n => n.toLocaleString('en-US');
 const fmtUSD = n => '$' + Math.round(n).toLocaleString('en-US');
+const fmtPct = n => (n * 100).toFixed(1) + '%';
+const fmtDur = sec => {
+  const m = Math.floor(sec / 60);
+  const s = Math.round(sec % 60);
+  return m + ':' + String(s).padStart(2, '0');
+};
 const cellNumAmt = (n, amt) => fmt(n) + '<div class="dim" style="font-size:11px; font-weight:normal; margin-top:2px;">' + fmtUSD(amt) + '</div>';
 const cellApproval = (approved, rejected) => {
   const total = approved + rejected;
@@ -406,6 +556,44 @@ function render() {
       '<td class="num">' + fmt(D.ZM.contact[i]) + '</td>' +
       '<td class="num">' + fmt(D.ZM.lead[i]) + '</td></tr>';
   }).join('');
+
+  function engRows(tbodyId, d) {
+    document.getElementById(tbodyId).innerHTML = periods.map((p, i) => {
+      const cls = p.partial ? ' class="partial"' : '';
+      const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
+      return '<tr' + cls + '>' +
+        '<td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
+        '<td class="num">' + fmtPct(d.engagementRate[i]) + '</td>' +
+        '<td class="num">' + fmtDur(d.avgDuration[i]) + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+  engRows('tbl-ocw-eng', D.OCW);
+  engRows('tbl-zm-eng', D.ZM);
+
+  function queryRows(tbodyId, rows) {
+    document.getElementById(tbodyId).innerHTML = rows.map(r =>
+      '<tr><td>' + r.q + '</td>' +
+        '<td class="num">' + fmt(r.clicks) + '</td>' +
+        '<td class="num">' + fmt(r.impr) + '</td>' +
+        '<td class="num">' + fmtPct(r.ctr) + '</td>' +
+        '<td class="num">' + r.pos.toFixed(1) + '</td></tr>'
+    ).join('');
+  }
+  queryRows('tbl-ocw-queries', D.OCW.topQueries);
+  queryRows('tbl-zm-queries', D.ZM.topQueries);
+
+  function pageRows(tbodyId, rows) {
+    document.getElementById(tbodyId).innerHTML = rows.map(r => {
+      const path = r.p.length > 50 ? r.p.slice(0, 47) + '…' : r.p;
+      return '<tr><td title="' + r.p + '" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;">' + path + '</td>' +
+        '<td class="num">' + fmt(r.clicks) + '</td>' +
+        '<td class="num">' + fmtPct(r.ctr) + '</td>' +
+        '<td class="num">' + r.pos.toFixed(1) + '</td></tr>';
+    }).join('');
+  }
+  pageRows('tbl-ocw-pages', D.OCW.topPages);
+  pageRows('tbl-zm-pages', D.ZM.topPages);
 
   document.getElementById('tbl-placeholder').innerHTML = periods.map((p, i) => {
     const cls = p.partial ? ' class="partial"' : '';
