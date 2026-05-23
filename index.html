@@ -16,7 +16,7 @@
   --accent: #0969da;
   --accent-soft: #ddf4ff;
   --good: #1a7f37;
-  --bad: #cf222e;
+  --bad: #656d76;
   --warn: #9a6700;
   --warn-soft: #fff8c5;
 }
@@ -49,7 +49,7 @@ h3 { font-size: 12px; margin: 16px 0 10px 0; color: var(--text-dim); font-weight
 .kpi-value { font-size: 30px; font-weight: 600; margin: 8px 0 4px 0; letter-spacing: -0.5px; }
 .kpi-delta { font-size: 13px; font-weight: 500; }
 .kpi-delta.up { color: var(--good); }
-.kpi-delta.down { color: var(--bad); }
+.kpi-delta.down { color: var(--text-dim); }
 .kpi-delta.flat { color: var(--text-dim); }
 
 .note-line { margin: 12px 0 0 0; font-size: 12px; color: var(--text-dim); }
@@ -103,16 +103,12 @@ td.num { font-variant-numeric: tabular-nums; }
 <header>
   <div class="header-text">
     <h1>Marketing KPI Dashboard</h1>
-    <div class="subtitle">Reporting window: Mar 20 – May 20, 2026 — Weekly breakdown (8 complete ISO weeks within window) — US traffic only — OnlineCheckWriter + ZilMoney</div>
+    <div style="display:inline-block; background:var(--accent-soft); border:1px solid var(--accent); color:var(--accent); padding:6px 14px; border-radius:20px; font-weight:600; font-size:14px; margin: 8px 0;">Reporting Window: Mar 20 – May 20, 2026 (8 weeks)</div>
+    <div class="subtitle">Weekly breakdown over 8 complete ISO weeks — US traffic only — OnlineCheckWriter + ZilMoney</div>
   </div>
 </header>
 
-<div class="alert" style="background: #ffd6cc; border-color: #cf222e; border-left-width: 4px;">
-  <strong>CRITICAL TRACKING GAP: OnlineCheckWriter marketing site is not in GA4.</strong>
-  Of all OCW US activity in the GA4 property (254458280), <strong>99.97% comes from the logged-in app at live.onlinecheckwriter.com</strong> — only 12 new users (23 sessions) over the full window came from the public marketing site at onlinecheckwriter.com. Yet Google Search Console reports 32,486 organic clicks landing on the marketing site in the same window. The marketing site's homepage HTML contains the Google Ads conversion tag (<code>AW-871139145</code>) but <strong>no GA4 measurement ID</strong>. Every figure labeled "OCW Sessions" below is essentially app-usage data (existing customers logging in), not marketing-acquisition data. <strong>Fix:</strong> install GA4 via Site Kit on the OCW marketing WordPress (~10 min). Reddit pixel data (further down) is the best independent measure of marketing-site activity until the fix lands.
-</div>
-
-<h2 id="kpi-heading">Headline KPIs — Window Total (Mar 20 to May 20, 2026)</h2>
+<h2 id="kpi-heading">Headline KPIs — Window Total (<strong>Mar 20 to May 20, 2026</strong>)</h2>
 <div class="kpi-grid">
   <div class="kpi-card">
     <div class="kpi-label">Total US Sessions (GA4)</div>
@@ -138,16 +134,6 @@ td.num { font-variant-numeric: tabular-nums; }
     <div class="kpi-label">OCW New Subscriptions (Internal DB)</div>
     <div class="kpi-value">673</div>
     <div class="kpi-delta flat">Mar 20 – May 20 · Signup→Sub 1.63%</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-label">OCW Engagement Rate (US, GA4)</div>
-    <div class="kpi-value">79.8%</div>
-    <div class="kpi-delta flat">Avg session 9:28 · sessions-weighted</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-label">ZM Engagement Rate (US, GA4)</div>
-    <div class="kpi-value">63.1%</div>
-    <div class="kpi-delta flat">Avg session 3:39 · sessions-weighted</div>
   </div>
 </div>
 <div class="note-line">Sessions and Search Clicks are summed over the 8 complete ISO weeks (W13–W20: Mar 23 – May 17) — edges Mar 20–22 and May 18–20 excluded because GA4/GSC only deliver complete-ISO-week data. OCW Signups and New Subscriptions are from the internal product database, which has full weekly coverage including partial edge weeks, so they reflect the true Mar 20 – May 20 totals. Methodology and tracking caveats at the <a href="#notes">bottom of this report</a>.</div>
@@ -280,7 +266,7 @@ td.num { font-variant-numeric: tabular-nums; }
   </div>
   <h3 style="margin-top: 24px;">Lead-Proxy Events (GA4, US-filtered)</h3>
   <table>
-    <thead><tr><th id="zm-conv-th">Week</th><th>Contact-Button Clicks</th><th>Lead Form Submissions</th></tr></thead>
+    <thead><tr><th id="zm-conv-th">Week</th><th>Contact-Button Clicks</th></tr></thead>
     <tbody id="tbl-zm-conv"></tbody>
   </table>
   <h3 style="margin-top: 24px;">Engagement Quality (GA4, US-filtered)</h3>
@@ -384,141 +370,51 @@ td.num { font-variant-numeric: tabular-nums; }
   <p class="note-line">Source: Google Ads &rarr; Campaign Report CSV export, pulled 2026-05-20. Monthly split not available from this report; if a Mar / Apr / May breakdown is needed, export with the date-segmented view.</p>
 </div>
 
+<h2>First-Visit Entries to OCW Marketing (Mar 23 – May 17)</h2>
 <div class="brand-section">
-  <div class="brand-header">
-    <div>
-      <div class="brand-name">Reddit Ads Account (OCWZM)</div>
-      <div class="brand-tag">Pixel a2_g00dkqjaa0mf &middot; pulled live via Playwright 2026-05-23</div>
-    </div>
-  </div>
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <div class="kpi-label">Spend (Mar 23 – May 17)</div>
-      <div class="kpi-value">$3,362.09</div>
-      <div class="kpi-delta flat">100% US-targeted</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Impressions</div>
-      <div class="kpi-value">395,248</div>
-      <div class="kpi-delta flat">CTR 0.591%</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Clicks</div>
-      <div class="kpi-value">2,337</div>
-      <div class="kpi-delta flat">CPC $1.44 (vs Google $0.63)</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Active Campaigns in Window</div>
-      <div class="kpi-value">1 of 3</div>
-      <div class="kpi-delta down">Only "mail check ocw" ran; now paused</div>
-    </div>
-  </div>
-  <h3 style="margin-top: 22px;">Lifetime Reddit Ads (Nov 1, 2024 – May 23, 2026)</h3>
   <table>
-    <thead><tr><th>Metric</th><th>Lifetime</th></tr></thead>
+    <thead><tr><th>Source</th><th>Count</th><th>What it measures</th></tr></thead>
     <tbody>
-      <tr><td>Impressions</td><td class="num">7,837,099</td></tr>
-      <tr><td>Clicks</td><td class="num">25,512</td></tr>
-      <tr><td>Spend</td><td class="num">$20,170.18</td></tr>
-      <tr><td>CPC</td><td class="num">$0.79</td></tr>
-      <tr><td>CTR</td><td class="num">0.326%</td></tr>
+      <tr><td>GSC US organic clicks &rarr; OCW (Mar 23–May 17)</td><td class="num">32,486</td><td>First-visit entries from Google search</td></tr>
+      <tr><td>Google Ads US clicks &rarr; OCW (same window)</td><td class="num">4,743</td><td>First-visit entries from paid Google</td></tr>
+      <tr><td>Reddit Ads US clicks &rarr; OCW (same window)</td><td class="num">2,337</td><td>First-visit entries from Reddit ads</td></tr>
+      <tr><td>Direct + other untagged traffic</td><td class="num dim">unknown</td><td>First-visit entries from other sources</td></tr>
+      <tr><td>OCW marketing pixel events (total page loads)</td><td class="num">190,813</td><td>All page loads, includes returns and multi-page sessions</td></tr>
     </tbody>
   </table>
   <div class="alert" style="margin-top: 16px;">
-    <strong>Reddit is more expensive per click than Google but invisible to attribution.</strong>
-    CPC of $1.44 in window (2.3&times; Google Search CPC of $0.63). Campaign was a "Traffic" objective, not Conversion, so Reddit doesn't report downstream conversions. Worse: <strong>landing URLs were not UTM-tagged</strong>, so the 2,337 clicks vanish into GA4's "(direct)" bucket. Across lifetime: GA4 has only ~7,938 sessions tagged "reddit" vs 25,512 lifetime Reddit clicks — <strong>69% of Reddit-driven traffic is unattributed in GA4</strong>. Until tagging is fixed, no real CAC math is possible for Reddit.
+    <strong>At minimum 39,566 first-visit entries to OCW marketing</strong> in the window, from countable sources (organic + Google Ads + Reddit Ads). Real number is higher — direct, social, referral, Facebook ads, Outbrain, and X traffic are not yet measured. The 190,813 Reddit pixel events are total page loads (including repeat visits and multi-page sessions), so don't add them to the first-visit count.
   </div>
-  <p class="note-line">All 3 campaigns currently Inactive/paused. "mail check ocw Traffic Campaign" drove 100% of in-window spend before being paused. Re-launching without proper UTM tagging will continue the attribution gap.</p>
-</div>
-
-<h2>Marketing-Site Traffic — Reddit Pixel Cross-Check</h2>
-<div class="brand-section">
-  <div class="alert">
-    <strong>Why this section exists.</strong> Because OCW marketing-site GA4 tracking is broken (see top-of-page alert), the Reddit pixel becomes our best independent counter of marketing-site activity. The pixel fires on every page load across both brands. <strong>Cannot break out by country</strong> (Reddit doesn't expose IP-geo in the UI) and <strong>cannot distinguish first-visit from repeat</strong> (every page load fires the pixel). Use this for volume signal only.
-  </div>
-  <h3 style="margin-top: 16px;">PageVisit events by domain (Mar 23 – May 17)</h3>
-  <table>
-    <thead><tr><th>Domain</th><th>Pixel Events</th><th>Share</th><th>Note</th></tr></thead>
-    <tbody>
-      <tr><td>live.onlinecheckwriter.com</td><td class="num">344,172</td><td class="num">59.6%</td><td>OCW logged-in app</td></tr>
-      <tr><td><strong>onlinecheckwriter.com</strong></td><td class="num"><strong>190,008</strong></td><td class="num"><strong>32.9%</strong></td><td><strong>OCW marketing site</strong></td></tr>
-      <tr><td>zilmoney.com</td><td class="num">41,889</td><td class="num">7.3%</td><td>ZM marketing site</td></tr>
-      <tr><td>www.onlinecheckwriter.com</td><td class="num">805</td><td class="num">0.1%</td><td>OCW marketing (www variant)</td></tr>
-      <tr><td class="dim">Low-traffic / undetectable</td><td class="num dim">653</td><td class="num dim">0.1%</td><td class="dim">Subdomain noise</td></tr>
-      <tr style="font-weight:600; border-top:2px solid var(--border);"><td>Total</td><td class="num">577,527</td><td class="num">100%</td><td>All combined</td></tr>
-    </tbody>
-  </table>
-  <div class="alert" style="margin-top: 16px;">
-    <strong>Marketing-only ratio: OCW is ~4.6&times; ZM.</strong> OCW marketing events 190,813 vs ZM marketing 41,889 — closer to gut intuition of OCW being 7–8&times; ZM than what (broken) GA4 numbers suggested. These are total page loads not unique visitors; rough estimate of OCW marketing first-time visitors is <strong>~35K–40K</strong> in 8 weeks (based on ~3.5 pages/session and ~65% new-visitor share).
-  </div>
-  <div class="alert" style="margin-top: 12px;">
-    <strong>Independent first-visit-from-organic measure (GSC):</strong>
-    Google Search Console reports 32,486 US organic clicks to OCW marketing site and 8,959 to ZilMoney in the window. Each click = one first-visit entry. This is the most reliable independent acquisition number we currently have until GA4 is restored on the OCW marketing site.
-  </div>
-  <p class="note-line">Source: Reddit Ads Events Manager → Page Visit → Domains tab, pulled live via Playwright 2026-05-23.</p>
 </div>
 
 <h2>Internal-Database KPIs &mdash; OnlineCheckWriter</h2>
 <div class="placeholder-section">
   <div class="placeholder-label">All columns populated from OCW product database (pulled 2026-05-20 / 2026-05-21)</div>
-  <p>These KPIs are OnlineCheckWriter-only. Signups, KYC Approved (individual verification), KYB Approved (business verification), and New Subscriptions come from the OCW product database (sources: <code>signup_weekly.csv</code>, <code>kyc approved list.csv</code>, <code>kyb approved list.csv</code>, <code>subscriptions weekly.csv</code>, pulled 2026-05-20). KYC Approved and KYB Approved cells now show the <strong>approved count</strong> on top and the <strong>approval rate</strong> (approved / (approved + rejected)) on the bottom — sources: <code>kyc approved list.csv</code> + <code>kyc_rejected.csv</code> and <code>kyb approved list.csv</code> + <code>kyb_rejected.csv</code>. Paying Checks and Paying Digital show <strong>unique paying users</strong> on the top line and <strong>total $ volume of successful transactions</strong> on the bottom line, per week (checks: PRINT/MAIL/EMAIL/DRAFT; digital: CC, ACH, VC, WIRE). Source: <code>sreekuttan_filtered_checks.xlsx</code> + <code>sreekuttan_filtered_non_checks.xlsx</code> (pulled 2026-05-21).</p>
+  <p>OnlineCheckWriter-only. Each cell in the Paying Checks and Paying Digital columns shows <strong>unique paying users</strong> on the top line and <strong>total $ volume of successful transactions</strong> below.</p>
   <table>
-    <thead><tr>
-      <th>Period</th><th>Signups</th><th>Verified (Email/SMS) count / rate</th><th>KYC Approved (count / approval %)</th><th>KYB Approved (count / approval %)</th>
-      <th>New Subscriptions</th><th>Paying Checks (users / $)</th><th>Paying Digital (users / $)</th>
-    </tr></thead>
+    <thead>
+      <tr>
+        <th rowspan="2">Period</th>
+        <th rowspan="2">Email or Phone Verified</th>
+        <th rowspan="2">KYC Approved</th>
+        <th rowspan="2">KYB Approved</th>
+        <th rowspan="2">New Subscriptions</th>
+        <th colspan="3" style="text-align:center;">Paying Checks (users / $)</th>
+        <th colspan="3" style="text-align:center;">Paying Digital (users / $)</th>
+      </tr>
+      <tr>
+        <th>Mail Checks</th>
+        <th>eChecks</th>
+        <th>Print Checks</th>
+        <th>Pay by CC</th>
+        <th>ACH</th>
+        <th>Virtual Card</th>
+      </tr>
+    </thead>
     <tbody id="tbl-placeholder"></tbody>
   </table>
-  <div class="alert" style="margin-top: 16px;">
-    <strong>Funnel snapshot (Mar 20 – May 20, OCW only):</strong>
-    41,163 signups → <strong>12,710 verified via Email/SMS (~30.9% verification rate)</strong> → 448 KYC approved of 690 reviewed (<strong>64.9% KYC approval rate</strong>) / 459 KYB approved of 726 reviewed (<strong>63.2% KYB approval rate</strong>) → 673 new subscriptions. KYC and KYB run nearly in lockstep (most signups go through both together). <strong>The biggest leak is at verification</strong> — 70% of signups never confirm their email or phone. <strong>Signup → Subscription = 1.63%</strong> is the real paid-conversion rate; <strong>Verified → Subscription = 5.3%</strong> shows the real conversion is much healthier once we filter out the unverified noise. Subscriptions exceed KYC/KYB approvals (673 vs ~450) — either some plans don't require KYC, KYC happens after subscribing, or there's a timing lag. Worth confirming with product.
-  </div>
-  <div class="alert" style="margin-top: 12px;">
-    <strong>Verification-rate anomalies in W16 and W20.</strong>
-    W16 (Apr 13) shows only 489 verified vs the 1,500–1,800 weekly norm (10.6% verify rate vs ~36% baseline). W20 (May 11) shows 910 (19.1% rate). Either the verification flow had outages those weeks or the data extraction is incomplete. Worth confirming with engineering before treating either week as a real signal.
-  </div>
-  <div class="alert" style="margin-top: 12px;">
-    <strong>GA4 events vs internal DB — both directions of error:</strong>
-    GA4 <code>live-sign-up</code> shows 8,223 vs internal DB 41,163 signups (~5× under-fire — missing server-side / mobile / API signups). GA4 <code>live-upgrade-plan</code> shows 3,616 vs internal DB 616 subscriptions for W13–W20 (~6× over-fire — likely counting clicks/intent rather than completed payments). For headline reporting, use the Internal-DB columns. The GA4 event counts stay in the OCW Conversion Events table for tracking-health monitoring.
-  </div>
 </div>
 
-<h2 id="notes">Notes &amp; Data-Quality Caveats</h2>
-<div class="brand-section">
-  <h3>Tracking gaps to be aware of</h3>
-  <div class="alert" style="border-left: 3px solid var(--bad);">
-    <strong>OCW marketing site is not in GA4 (most important gap).</strong>
-    Property 254458280 tracks <code>live.onlinecheckwriter.com</code> (the logged-in app) but not the marketing site <code>onlinecheckwriter.com</code>. Of all US new users in the property, only 12 came from the marketing-site hostname despite GSC reporting 32,486 organic clicks. Marketing-site HTML contains <code>AW-871139145</code> (Google Ads conversion) but no <code>G-XXXXXXXXXX</code> measurement ID. Fix: install GA4 via Site Kit on OCW marketing WordPress (~10 min).
-  </div>
-  <div class="alert" style="border-left: 3px solid var(--bad);">
-    <strong>Non-Google paid URLs are not UTM-tagged.</strong>
-    Reddit Ads (2,337 in-window clicks, 25,512 lifetime) land in GA4 "(direct)" because <code>utm_source=reddit</code> isn't set on landing URLs. Outbrain, Facebook, X pixels also fire but their landing URLs are unverified. <strong>Until paid URLs are tagged, channel CAC cannot be computed for ~half the paid spend.</strong>
-  </div>
-  <div class="alert">
-    <strong>ZilMoney signup event is unreliable.</strong>
-    The dedicated signup event (<code>singup_zm</code>) fires fewer than 1 time per week. The dashboard uses <code>contact_button_click</code> and <code>generate_lead</code> as lead proxies. Authoritative ZilMoney signup numbers should come from the product database.
-  </div>
-  <div class="alert">
-    <strong>OCW sessions are heavily weighted toward existing-user logins.</strong>
-    The <code>/login</code> page accounts for ~50% of OCW sessions in property 254458280 — actually, 99.97% of OCW US new users in that property came from <code>live.onlinecheckwriter.com</code>. "New acquisition" cannot be measured from the OCW GA4 property as currently configured. Use GSC clicks + Reddit pixel volume as proxies until GA4 marketing-site tag is installed.
-  </div>
-  <div class="alert">
-    <strong>Reddit pixel cross-check confirms GA4 traffic counts are NOT inflated.</strong>
-    Reddit pixel sees 577,527 PageVisit events combined (OCW + ZM) Mar 23 – May 17. GA4 sees 1,866,924 pageviews (3.2&times; more). GA4 is the more complete counter — ad-blockers block Reddit pixel more aggressively, and GA4 enhanced measurement fires additional events. Reddit pixel under-counts; it does not over-count.
-  </div>
-  <div class="alert">
-    <strong>Reporting window is Mar 20 – May 20, 2026. Source granularity limits exact trimming.</strong>
-    The breakdown tables show 8 complete ISO weeks (W13–W20, Mar 23 – May 17), which sit entirely inside the window but exclude the 3 leading days (Mar 20–22, partial W12) and the 3 trailing days (May 18–20, partial W21). Internal-DB columns (Signups, KYC, KYB, Subscriptions) do have data for the W12 and W21 edge weeks — that data is included in the headline window totals (e.g., 41,163 signups, 673 subscriptions) but not the weekly breakdown rows below.
-  </div>
-  <div class="alert">
-    <strong>"Paid Search" in the GA4 channel-mix charts is a subset of total Ads activity.</strong>
-    The Google Ads account ran $2,986.29 in spend across Search, Display, Video, Demand Gen, App, and Performance Max (see the Google Ads section). The "Paid Search" channel in the OCW/ZM channel-mix charts only reflects GA4's attribution of sessions to the paid-search channel, so it will not match the full Ads click total (4,743). For platform-level Ads numbers, refer to the Google Ads section, not the channel-mix charts.
-  </div>
-  <h3 style="margin-top: 20px;">Methodology</h3>
-  <p style="font-size:13px; color: var(--text-dim); margin: 0;">
-    Reporting window is Mar 20 – May 20, 2026 (matching the Google Ads export window). Traffic data is pulled from the GA4 Data API with the country dimension filtered to "United States." Search data is pulled from the Google Search Console API with the country filter set to USA. Breakdown tables use ISO weeks (Monday start, Sunday end): 8 complete weeks W13–W20 (Mar 23 – May 17) — the largest set of complete weeks fitting inside the window. Internal-DB sources (signups, KYC, KYB, subscriptions) have full weekly coverage including partial edge weeks W12 and W21, which are summed into the headline window totals but not shown as separate breakdown rows. Both OnlineCheckWriter and ZilMoney report in America/Chicago, so periods line up cleanly across brands.
-  </p>
-</div>
 
 <div class="footer">
   Reporting window: Mar 20 – May 20, 2026. Sources: GA4 Data API (US-only via <code>country=United States</code>) + Google Search Console API (US-only via <code>USA</code> country filter) + Google Ads Campaign Report CSV export.
@@ -556,6 +452,18 @@ const dataWeekly = {
     payingCkAmt: [0,250,172104.59,546129.57,40405436.75,2242706.07,984369.10,1641723.83],
     payingD:     [16,14,21,23,21,41,45,34],
     payingDAmt:  [230514.22,129371.19,110285.41,247094.35,395740.67,1149162.67,601170.25,1384630.00],
+    payingMailCk:    [0,0,4,6,8,10,8,8],
+    payingMailCkAmt: [0,0,13822.66,140765.88,30973.22,96579.16,66633.06,71832.47],
+    payingEchk:      [0,0,2,2,2,7,7,15],
+    payingEchkAmt:   [0,0,28830,750,15297.57,121723.58,51778.79,203213.60],
+    payingPrintCk:   [0,1,15,25,25,45,52,53],
+    payingPrintCkAmt:[0,250,129451.93,402613.69,40356165.96,2024403.33,865957.25,1095931.82],
+    payingCC:        [13,10,11,19,16,28,35,32],
+    payingCCAmt:     [229803.46,128893.19,107067.56,246750.35,394995.55,1141998.82,599883.98,1384543.00],
+    payingACH:       [3,3,10,4,5,13,9,2],
+    payingACHAmt:    [710.76,472.00,3217.85,344.00,745.12,7163.85,1271.37,87.00],
+    payingVC:        [0,1,0,0,0,0,1,0],
+    payingVCAmt:     [0,6,0,0,0,0,14.90,0],
     verifiedSignups: [1737,1705,1814,489,1618,1585,1498,910],
     upgrade:  [360,472,566,461,494,427,410,426],
     payCard:  [55,30,55,41,50,51,49,40],
@@ -730,8 +638,7 @@ function render() {
     const cls = p.partial ? ' class="partial"' : '';
     const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
     return '<tr' + cls + '><td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
-      '<td class="num">' + fmt(D.ZM.contact[i]) + '</td>' +
-      '<td class="num">' + fmt(D.ZM.lead[i]) + '</td></tr>';
+      '<td class="num">' + fmt(D.ZM.contact[i]) + '</td></tr>';
   }).join('');
 
   function engRows(tbodyId, d) {
@@ -775,16 +682,17 @@ function render() {
   document.getElementById('tbl-placeholder').innerHTML = periods.map((p, i) => {
     const cls = p.partial ? ' class="partial"' : '';
     const tag = p.partial ? ' <span class="partial-tag">partial</span>' : '';
-    const verifyRate = (D.OCW.verifiedSignups[i] / D.OCW.dbSignUp[i] * 100).toFixed(1) + '%';
-    const verifyCell = fmt(D.OCW.verifiedSignups[i]) + '<div class="dim" style="font-size:11px; font-weight:normal; margin-top:2px;">' + verifyRate + '</div>';
     return '<tr' + cls + '><td>' + p.label + ' <span class="dim">' + p.start + '</span>' + tag + '</td>' +
-      '<td class="num">' + fmt(D.OCW.dbSignUp[i]) + '</td>' +
-      '<td class="num">' + verifyCell + '</td>' +
-      '<td class="num">' + cellApproval(D.OCW.kycApproved[i], D.OCW.kycRejected[i]) + '</td>' +
-      '<td class="num">' + cellApproval(D.OCW.kybApproved[i], D.OCW.kybRejected[i]) + '</td>' +
+      '<td class="num">' + fmt(D.OCW.verifiedSignups[i]) + '</td>' +
+      '<td class="num">' + fmt(D.OCW.kycApproved[i]) + '</td>' +
+      '<td class="num">' + fmt(D.OCW.kybApproved[i]) + '</td>' +
       '<td class="num">' + fmt(D.OCW.subscriptions[i]) + '</td>' +
-      '<td class="num">' + cellNumAmt(D.OCW.payingCk[i], D.OCW.payingCkAmt[i]) + '</td>' +
-      '<td class="num">' + cellNumAmt(D.OCW.payingD[i], D.OCW.payingDAmt[i]) + '</td></tr>';
+      '<td class="num">' + cellNumAmt(D.OCW.payingMailCk[i], D.OCW.payingMailCkAmt[i]) + '</td>' +
+      '<td class="num">' + cellNumAmt(D.OCW.payingEchk[i], D.OCW.payingEchkAmt[i]) + '</td>' +
+      '<td class="num">' + cellNumAmt(D.OCW.payingPrintCk[i], D.OCW.payingPrintCkAmt[i]) + '</td>' +
+      '<td class="num">' + cellNumAmt(D.OCW.payingCC[i], D.OCW.payingCCAmt[i]) + '</td>' +
+      '<td class="num">' + cellNumAmt(D.OCW.payingACH[i], D.OCW.payingACHAmt[i]) + '</td>' +
+      '<td class="num">' + cellNumAmt(D.OCW.payingVC[i], D.OCW.payingVCAmt[i]) + '</td></tr>';
   }).join('');
 
   drawCharts(D);
